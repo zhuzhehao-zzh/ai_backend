@@ -1,6 +1,6 @@
 """Student information model — matches the frontend form fields."""
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional
 from datetime import date
 
@@ -48,8 +48,8 @@ class StudentInfo(BaseModel):
         description="Personal essay or statement summary",
     )
 
-    class Config:
-        json_schema_extra = {
+    model_config = ConfigDict(
+        json_schema_extra={
             "example": {
                 "full_name": "Zhang Wei",
                 "email": "zhangwei@example.com",
@@ -67,7 +67,8 @@ class StudentInfo(BaseModel):
                 ],
                 "personal_statement": "I want to combine AI and healthcare...",
             }
-        }
+        },
+    )
 
 
 class ErrorResponse(BaseModel):
@@ -81,5 +82,6 @@ class SubmitResponse(BaseModel):
 
     report_id: str
     generated_at: str
+    student_summary: dict
     recommendations: list[dict]
     action_items: list[str]
