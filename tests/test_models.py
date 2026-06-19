@@ -11,109 +11,92 @@ class TestStudentInfo:
 
     def test_valid_full_data(self):
         data = {
-            "full_name": "Zhang Wei",
-            "email": "zhangwei@example.com",
-            "high_school": "Beijing No.4 High School",
-            "gpa": 3.8,
-            "sat_score": 1450,
-            "intended_majors": ["Computer Science"],
+            "subjectTrack": "理科",
+            "province": "广东",
+            "score": 610,
+            "interests": "写代码、研究 AI",
+            "skills": "数学能力、逻辑推理",
+            "preferences": "高收入潜力、技术壁垒",
+            "preferredCities": ["深圳", "杭州"],
+            "dislikes": "不想学医",
         }
         info = StudentInfo(**data)
-        assert info.full_name == "Zhang Wei"
-        assert info.gpa == 3.8
-        assert info.sat_score == 1450
+        assert info.subjectTrack == "理科"
+        assert info.province == "广东"
+        assert info.score == 610
+        assert info.preferredCities == ["深圳", "杭州"]
 
     def test_minimal_required_fields_only(self):
         info = StudentInfo(
-            full_name="Li Ming",
-            email="liming@test.com",
-            high_school="Test High School",
-            gpa=3.5,
+            subjectTrack="理科",
+            province="广东",
+            score=600,
+            interests="编程",
+            skills="数学",
+            preferences="高收入",
+            dislikes="学医",
         )
-        assert info.intended_majors == []
-        assert info.extracurriculars == []
-        assert info.phone is None
+        assert info.preferredCities == []
 
     def test_missing_required_field_fails(self):
         with pytest.raises(ValidationError):
-            StudentInfo()  # missing full_name, email, high_school, gpa
+            StudentInfo()  # missing all required fields
 
-    def test_empty_full_name_fails(self):
+    def test_empty_province_fails(self):
         with pytest.raises(ValidationError):
             StudentInfo(
-                full_name="",
-                email="test@test.com",
-                high_school="HS",
-                gpa=3.0,
+                subjectTrack="理科",
+                province="",
+                score=600,
+                interests="编程",
+                skills="数学",
+                preferences="高收入",
+                dislikes="学医",
             )
 
-    def test_invalid_gpa_above_range_fails(self):
+    def test_score_below_zero_fails(self):
         with pytest.raises(ValidationError):
             StudentInfo(
-                full_name="Test",
-                email="test@test.com",
-                high_school="HS",
-                gpa=5.0,
+                subjectTrack="理科",
+                province="广东",
+                score=-1,
+                interests="编程",
+                skills="数学",
+                preferences="高收入",
+                dislikes="学医",
             )
 
-    def test_invalid_gpa_below_range_fails(self):
+    def test_score_above_750_fails(self):
         with pytest.raises(ValidationError):
             StudentInfo(
-                full_name="Test",
-                email="test@test.com",
-                high_school="HS",
-                gpa=-0.5,
+                subjectTrack="理科",
+                province="广东",
+                score=751,
+                interests="编程",
+                skills="数学",
+                preferences="高收入",
+                dislikes="学医",
             )
 
-    def test_invalid_sat_below_min_fails(self):
-        with pytest.raises(ValidationError):
-            StudentInfo(
-                full_name="Test",
-                email="test@test.com",
-                high_school="HS",
-                gpa=3.0,
-                sat_score=200,
-            )
-
-    def test_invalid_sat_above_max_fails(self):
-        with pytest.raises(ValidationError):
-            StudentInfo(
-                full_name="Test",
-                email="test@test.com",
-                high_school="HS",
-                gpa=3.0,
-                sat_score=1700,
-            )
-
-    def test_invalid_act_below_min_fails(self):
-        with pytest.raises(ValidationError):
-            StudentInfo(
-                full_name="Test",
-                email="test@test.com",
-                high_school="HS",
-                gpa=3.0,
-                act_score=0,
-            )
-
-    def test_all_list_fields_default_to_empty(self):
-        info = StudentInfo(
-            full_name="A",
-            email="a@b.com",
-            high_school="HS",
-            gpa=3.0,
+    def test_score_at_boundaries_succeeds(self):
+        info_min = StudentInfo(
+            subjectTrack="文科",
+            province="北京",
+            score=0,
+            interests="a",
+            skills="b",
+            preferences="c",
+            dislikes="d",
         )
-        assert info.intended_majors == []
-        assert info.coursework == []
-        assert info.preferred_regions == []
-        assert info.extracurriculars == []
-        assert info.awards == []
+        assert info_min.score == 0
 
-    def test_personal_statement_max_length(self):
-        with pytest.raises(ValidationError):
-            StudentInfo(
-                full_name="Test",
-                email="test@test.com",
-                high_school="HS",
-                gpa=3.0,
-                personal_statement="x" * 5001,
-            )
+        info_max = StudentInfo(
+            subjectTrack="文科",
+            province="北京",
+            score=750,
+            interests="a",
+            skills="b",
+            preferences="c",
+            dislikes="d",
+        )
+        assert info_max.score == 750

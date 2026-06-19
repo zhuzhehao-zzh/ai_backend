@@ -1,0 +1,55 @@
+{
+  "report_id": "89b0f277-4382-4f8e-ad41-f35c0e3ec50a",
+  "generated_at": "2026-06-19T13:17:45.489086+00:00",
+  "student_summary": {
+    "full_name": "Zhang Wei",
+    "email": "zhangwei@example.com",
+    "high_school": "Beijing No.4 High School",
+    "gpa": 3.8,
+    "intended_majors": [
+      "Computer Science",
+      "Mathematics"
+    ]
+  },
+  "recommendations": [
+    {
+      "university": "Stanford University",
+      "major": "Computer Science",
+      "match_score": 0.9,
+      "rationale": "Stanford is renowned for its Computer Science program, and Zhang Wei's strong GPA and SAT score make him a competitive candidate. His involvement in Math Club also aligns well with the rigorous academic environment."
+    },
+    {
+      "university": "Massachusetts Institute of Technology (MIT)",
+      "major": "Mathematics",
+      "match_score": 0.85,
+      "rationale": "MIT is a top institution for Mathematics, and Zhang Wei's high GPA and SAT score suggest he could thrive in their challenging curriculum. His leadership in Math Club further demonstrates his passion and aptitude for the subject."
+    },
+    {
+      "university": "University of California, Berkeley",
+      "major": "Computer Science",
+      "match_score": 0.8,
+      "rationale": "UC Berkeley offers a strong Computer Science program, and Zhang Wei's academic profile is well-suited for their competitive environment. His interest in both Computer Science and Mathematics could be well-served by Berkeley's interdisciplinary approach."
+    },
+    {
+      "university": "Carnegie Mellon University",
+      "major": "Computer Science",
+      "match_score": 0.75,
+      "rationale": "Carnegie Mellon is recognized for its Computer Science program, and Zhang Wei's strong academic credentials make him a good fit. His leadership in Math Club and interest in Computer Science align with CMU's emphasis on theoretical and practical computer science education."
+    },
+    {
+      "university": "University of Illinois at Urbana-Champaign",
+      "major": "Computer Science",
+      "match_score": 0.7,
+      "rationale": "UIUC is known for its excellent Computer Science program and Zhang Wei's GPA and SAT score are within the competitive range. His leadership in Math Club and participation in basketball demonstrate a well-rounded profile that could be appealing to UIUC."
+    }
+  ],
+  "action_items": [
+    "Research application deadlines for the recommended universities and plan accordingly.",
+    "Consider taking additional math or computer science courses if available to strengthen the academic profile.",
+    "Prepare for any additional standardized tests required by the universities, such as the SAT Subject Tests in Math.",
+    "Draft personal statements highlighting leadership in Math Club, involvement in basketball, and passion for Computer Science and Mathematics.",
+    "Seek letters of recommendation from teachers in Computer Science and Mathematics to support the application.",
+    "Explore scholarship opportunities to fit within the budget range, if applicable.",
+    "Participate in coding competitions or math contests to further demonstrate expertise and interest in the intended majors."
+  ]
+}

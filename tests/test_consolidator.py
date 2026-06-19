@@ -13,17 +13,21 @@ pytestmark = pytest.mark.asyncio
 class TestConsolidator:
     """consolidate_and_save — file creation and data fidelity."""
 
+    BASE_INFO = {
+        "subjectTrack": "理科",
+        "province": "广东",
+        "score": 610,
+        "interests": "编程",
+        "skills": "数学",
+        "preferences": "高收入",
+        "dislikes": "学医",
+    }
+
     async def test_creates_json_file(self, monkeypatch, tmp_path):
         test_dir = tmp_path / "input"
         monkeypatch.setattr("services.consolidator.DATA_INPUT_DIR", test_dir)
 
-        info = StudentInfo(
-            full_name="Test Student",
-            email="test@example.com",
-            high_school="Test High School",
-            gpa=3.5,
-        )
-
+        info = StudentInfo(**self.BASE_INFO)
         filepath = await consolidate_and_save(info)
         assert filepath.exists()
         assert filepath.suffix == ".json"
@@ -34,61 +38,46 @@ class TestConsolidator:
         monkeypatch.setattr("services.consolidator.DATA_INPUT_DIR", test_dir)
 
         info = StudentInfo(
-            full_name="Test Student",
-            email="test@example.com",
-            phone="13800138000",
-            high_school="Test High School",
-            gpa=3.5,
-            sat_score=1400,
-            intended_majors=["Engineering", "Physics"],
-            extracurriculars=["Chess Club", "Soccer"],
+            subjectTrack="理科",
+            province="广东",
+            score=610,
+            interests="写代码、研究 AI",
+            skills="数学能力、逻辑推理",
+            preferences="高收入潜力、技术壁垒",
+            preferredCities=["深圳", "杭州"],
+            dislikes="不想学医、不接受高压行业",
         )
 
         filepath = await consolidate_and_save(info)
         raw = filepath.read_text(encoding="utf-8")
         data = json.loads(raw)
 
-        assert data["full_name"] == "Test Student"
-        assert data["gpa"] == 3.5
-        assert data["sat_score"] == 1400
-        assert data["intended_majors"] == ["Engineering", "Physics"]
-        assert data["extracurriculars"] == ["Chess Club", "Soccer"]
-        assert data["phone"] == "13800138000"
+        assert data["subjectTrack"] == "理科"
+        assert data["province"] == "广东"
+        assert data["score"] == 610
+        assert data["interests"] == "写代码、研究 AI"
+        assert data["preferredCities"] == ["深圳", "杭州"]
 
-    async def test_optional_fields_excluded_when_none(self, monkeypatch, tmp_path):
+    async def test_optional_fields_excluded_when_empty(self, monkeypatch, tmp_path):
         test_dir = tmp_path / "input"
         monkeypatch.setattr("services.consolidator.DATA_INPUT_DIR", test_dir)
 
-        info = StudentInfo(
-            full_name="A",
-            email="a@b.com",
-            high_school="HS",
-            gpa=3.0,
-        )
+        info = StudentInfo(**self.BASE_INFO)
 
         filepath = await consolidate_and_save(info)
         raw = filepath.read_text(encoding="utf-8")
         data = json.loads(raw)
 
-        # exclude_none=True so None fields should be absent
-        assert "phone" not in data
-        assert "date_of_birth" not in data
-        assert "sat_score" not in data
-        assert "act_score" not in data
-        assert "budget_range" not in data
-        assert "personal_statement" not in data
+        # preferredCities has default_factory=list, so it should be [] not None
+        # With exclude_none=True, empty list [] is NOT excluded (it's not None)
+        assert "preferredCities" in data
+        assert data["preferredCities"] == []
 
     async def test_creates_parent_directory_if_missing(self, monkeypatch, tmp_path):
         deep_dir = tmp_path / "a" / "b" / "input"
         monkeypatch.setattr("services.consolidator.DATA_INPUT_DIR", deep_dir)
 
-        info = StudentInfo(
-            full_name="B",
-            email="b@b.com",
-            high_school="HS",
-            gpa=3.0,
-        )
-
+        info = StudentInfo(**self.BASE_INFO)
         filepath = await consolidate_and_save(info)
         assert filepath.exists()
         assert deep_dir.exists()

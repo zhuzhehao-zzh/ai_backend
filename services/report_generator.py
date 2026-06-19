@@ -24,7 +24,10 @@ async def save_report(model_response: dict, student_info: dict) -> dict:
         "student_summary": {
             k: v
             for k, v in student_info.items()
-            if k in ("full_name", "email", "high_school", "gpa", "intended_majors")
+            if k in (
+                "subjectTrack", "province", "score",
+                "interests", "preferredCities",
+            )
         },
         "recommendations": model_response.get("recommendations", []),
         "action_items": model_response.get("action_items", []),

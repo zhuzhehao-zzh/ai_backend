@@ -1,0 +1,55 @@
+{
+  "report_id": "a9edd960-1ca2-47b1-9579-a6748ac21b13",
+  "generated_at": "2026-06-19T13:14:44.406055+00:00",
+  "student_summary": {
+    "full_name": "Zhang Wei",
+    "email": "zhangwei@example.com",
+    "high_school": "Beijing No.4 High School",
+    "gpa": 3.8,
+    "intended_majors": [
+      "Computer Science",
+      "Mathematics"
+    ]
+  },
+  "recommendations": [
+    {
+      "university": "Stanford University",
+      "major": "Computer Science",
+      "match_score": 0.9,
+      "rationale": "Stanford has one of the best Computer Science programs globally, and Zhang Wei's GPA and SAT score are strong indicators of academic potential. The Math Club presidency suggests leadership and interest in related fields."
+    },
+    {
+      "university": "Massachusetts Institute of Technology (MIT)",
+      "major": "Mathematics",
+      "match_score": 0.85,
+      "rationale": "MIT's Mathematics department is highly regarded, and Zhang Wei's interest in Mathematics aligns well with this major. Participation in Math Club as president demonstrates a passion for the subject."
+    },
+    {
+      "university": "Carnegie Mellon University",
+      "major": "Computer Science",
+      "match_score": 0.8,
+      "rationale": "Carnegie Mellon is renowned for its Computer Science program. Zhang Wei's high GPA and SAT score, along with leadership in Math Club, make him a competitive applicant."
+    },
+    {
+      "university": "University of California, Berkeley",
+      "major": "Computer Science",
+      "match_score": 0.75,
+      "rationale": "Berkeley offers a strong Computer Science program and is known for its diverse student body. Zhang Wei's academic achievements make him a suitable candidate."
+    },
+    {
+      "university": "Harvard University",
+      "major": "Mathematics",
+      "match_score": 0.7,
+      "rationale": "Harvard's Mathematics program is prestigious, and the holistic admissions process may appreciate Zhang Wei's extracurricular activities and leadership roles."
+    }
+  ],
+  "action_items": [
+    "Research scholarships and financial aid opportunities for the preferred budget range.",
+    "Prepare for additional standardized tests such as the ACT to broaden application options.",
+    "Strengthen the personal statement by connecting Zhang Wei's experiences in Math Club and Basketball to the intended majors.",
+    "Gather letters of recommendation, focusing on those from Math and Computer Science teachers who can speak to his aptitude and passion.",
+    "Identify application deadlines for the intended universities and prepare accordingly.",
+    "Explore internship or research opportunities in Computer Science or Mathematics to bolster the application.",
+    "Consider attending college fairs or information sessions to gain insights into the application process and university culture."
+  ]
+}

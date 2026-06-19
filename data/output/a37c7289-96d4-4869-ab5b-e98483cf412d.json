@@ -1,0 +1,55 @@
+{
+  "report_id": "a37c7289-96d4-4869-ab5b-e98483cf412d",
+  "generated_at": "2026-06-19T13:10:30.377305+00:00",
+  "student_summary": {
+    "full_name": "Zhang Wei",
+    "email": "zhangwei@example.com",
+    "high_school": "Beijing No.4 High",
+    "gpa": 3.8,
+    "intended_majors": [
+      "CS",
+      "Math"
+    ]
+  },
+  "recommendations": [
+    {
+      "university": "Peking University",
+      "major": "Computer Science",
+      "match_score": 0.9,
+      "rationale": "Peking University is one of the most prestigious universities in China with strong programs in both Computer Science and Mathematics. Zhang Wei's high GPA and SAT scores make him a competitive candidate."
+    },
+    {
+      "university": "Tsinghua University",
+      "major": "Computer Science",
+      "match_score": 0.85,
+      "rationale": "Tsinghua University is also a top university in China with excellent CS and Math programs. Zhang Wei's strong academic profile aligns well with their admissions standards."
+    },
+    {
+      "university": "Stanford University",
+      "major": "Computer Science",
+      "match_score": 0.7,
+      "rationale": "Stanford is a world-renowned university with a top-tier CS program. Although highly competitive, Zhang Wei's GPA and SAT scores are within the range of admitted students."
+    },
+    {
+      "university": "Massachusetts Institute of Technology (MIT)",
+      "major": "Mathematics",
+      "match_score": 0.65,
+      "rationale": "MIT is renowned for its rigorous math program. Zhang Wei's strong GPA and SAT scores, along with a demonstrated passion for math, could make him a competitive applicant."
+    },
+    {
+      "university": "University of California, Berkeley",
+      "major": "Computer Science",
+      "match_score": 0.75,
+      "rationale": "UC Berkeley has a highly rated CS program that is more accessible than Stanford. Zhang Wei's academic credentials are strong, and he could be a competitive candidate."
+    }
+  ],
+  "action_items": [
+    "Research scholarship opportunities at each university, especially for international students.",
+    "Prepare for and register for the TOEFL or IELTS, if not already done, as English proficiency is a requirement for most US universities.",
+    "Strengthen the application by participating in relevant extracurricular activities, such as coding competitions or math clubs.",
+    "Consider retaking the SAT to aim for a higher score, especially if aiming for top-tier US universities.",
+    "Draft and refine the personal statement, focusing on Zhang Wei's passion for computer science and math, and any related experiences or projects.",
+    "Gather letters of recommendation from teachers or mentors who can speak to Zhang Wei's academic abilities and potential.",
+    "Set up a timeline for application deadlines for each university to ensure all materials are submitted on time."
+  ]
+}

@@ -119,67 +119,55 @@ ai_backend/
 
 ### `POST /api/submit`
 
-Receives student form data and returns a college application guidance report.
+Receives student Gaokao (高考) information and returns a college guidance report.
 
 **Request Body** (JSON):
 
 ```json
 {
-  "full_name": "Zhang Wei",
-  "email": "zhangwei@example.com",
-  "phone": "13800138000",
-  "date_of_birth": "2006-05-15",
-  "high_school": "Beijing No.4 High School",
-  "graduation_year": 2025,
-  "gpa": 3.8,
-  "sat_score": 1450,
-  "act_score": null,
-  "intended_majors": ["Computer Science", "Mathematics"],
-  "coursework": ["AP Calculus BC", "AP Physics C"],
-  "preferred_regions": ["California", "New York"],
-  "budget_range": "30k-60k",
-  "extracurriculars": ["Math Club President", "Varsity Basketball"],
-  "awards": ["National Math Olympiad Finalist"],
-  "personal_statement": "I want to combine AI and healthcare..."
+  "subjectTrack": "理科",
+  "province": "广东",
+  "score": 610,
+  "interests": "写代码、研究 AI、解决工程问题",
+  "skills": "数学能力、逻辑推理、自学能力",
+  "preferences": "高收入潜力、技术壁垒、稳定性",
+  "preferredCities": ["深圳", "杭州"],
+  "dislikes": "不想学医、不接受高压行业"
 }
 ```
 
-**Required fields**: `full_name`, `email`, `high_school`, `gpa`
+**Required fields**: `subjectTrack`, `province`, `score`, `interests`, `skills`, `preferences`, `dislikes`
 
 **Validation rules**:
 | Field | Constraint |
 |---|---|
-| `full_name` | min length 1 |
-| `gpa` | 0.0 – 4.0 |
-| `sat_score` | 400 – 1600 |
-| `act_score` | 1 – 36 |
-| `graduation_year` | 2024 – 2030 |
-| `personal_statement` | max 5000 characters |
+| `score` | 0 – 750 |
+| `province` | min length 1 |
 
 **Success Response** (200):
 
 ```json
 {
   "report_id": "a1b2c3d4-...",
-  "generated_at": "2026-06-18T22:00:00+00:00",
+  "generated_at": "2026-06-19T21:00:00+00:00",
   "student_summary": {
-    "full_name": "Zhang Wei",
-    "email": "zhangwei@example.com",
-    "high_school": "Beijing No.4 High School",
-    "gpa": 3.8,
-    "intended_majors": ["Computer Science"]
+    "subjectTrack": "理科",
+    "province": "广东",
+    "score": 610,
+    "interests": "写代码、研究 AI、解决工程问题",
+    "preferredCities": ["深圳", "杭州"]
   },
   "recommendations": [
     {
-      "university": "Stanford",
-      "major": "Computer Science",
-      "match_score": 0.85,
-      "rationale": "Strong academic record aligns well."
+      "university": "深圳大学",
+      "major": "计算机科学与技术",
+      "match_score": 0.9,
+      "rationale": "分数匹配，专业实力强"
     }
   ],
   "action_items": [
-    "Prepare personal statement by October 15",
-    "Request recommendation letters by November 1"
+    "建议优先填报提前批",
+    "准备好综合素质评价材料"
   ]
 }
 ```
@@ -190,10 +178,10 @@ Receives student form data and returns a college application guidance report.
 {
   "detail": [
     {
-      "type": "greater_than_equal",
-      "loc": ["body", "gpa"],
-      "msg": "Input should be greater than or equal to 0",
-      "input": -0.5
+      "type": "less_than_equal",
+      "loc": ["body", "score"],
+      "msg": "Input should be less than or equal to 750",
+      "input": 800
     }
   ]
 }
@@ -252,12 +240,14 @@ Server starts at `http://localhost:8000`. Docs are at `http://localhost:8000/doc
 curl -X POST http://localhost:8000/api/submit \
   -H "Content-Type: application/json" \
   -d '{
-    "full_name": "Zhang Wei",
-    "email": "zhangwei@example.com",
-    "high_school": "Beijing No.4 High School",
-    "gpa": 3.8,
-    "sat_score": 1450,
-    "intended_majors": ["Computer Science"]
+    "subjectTrack": "理科",
+    "province": "广东",
+    "score": 610,
+    "interests": "写代码、研究 AI",
+    "skills": "数学能力、逻辑推理",
+    "preferences": "高收入潜力、技术壁垒",
+    "preferredCities": ["深圳", "杭州"],
+    "dislikes": "不想学医"
   }'
 ```
 
@@ -265,12 +255,12 @@ curl -X POST http://localhost:8000/api/submit \
 
 ## Testing
 
-The test suite covers **27 test cases** across 4 test files:
+The test suite covers **23 test cases** across 4 test files:
 
 | File | Tests | Focus |
 |---|---|---|
-| `tests/test_models.py` | 12 | Pydantic validation — required fields, value ranges, defaults, max lengths |
-| `tests/test_consolidator.py` | 4 | File creation, JSON data fidelity, `exclude_none` behavior, directory creation |
+| `tests/test_models.py` | 7 | Pydantic validation — required fields, score range (0-750), empty defaults |
+| `tests/test_consolidator.py` | 4 | File creation, JSON data fidelity, optional fields, directory creation |
 | `tests/test_report_generator.py` | 5 | Report structure, `student_summary` filtering, disk output, empty defaults |
 | `tests/test_api.py` | 7 | Full integration: success path, validation errors, file I/O chain, response structure |
 

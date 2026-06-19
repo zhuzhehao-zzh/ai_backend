@@ -13,11 +13,14 @@ class TestReportGenerator:
     """save_report — report structure, disk output, defaults."""
 
     BASE_STUDENT = {
-        "full_name": "Test",
-        "email": "t@t.com",
-        "high_school": "HS",
-        "gpa": 3.8,
-        "intended_majors": ["CS"],
+        "subjectTrack": "理科",
+        "province": "广东",
+        "score": 610,
+        "interests": "写代码、研究 AI",
+        "skills": "数学能力、逻辑推理",
+        "preferences": "高收入潜力、技术壁垒",
+        "preferredCities": ["深圳", "杭州"],
+        "dislikes": "不想学医",
     }
 
     async def test_returns_correct_structure(self, monkeypatch, tmp_path):
@@ -27,13 +30,13 @@ class TestReportGenerator:
         model_response = {
             "recommendations": [
                 {
-                    "university": "MIT",
-                    "major": "Computer Science",
+                    "university": "深圳大学",
+                    "major": "计算机科学与技术",
                     "match_score": 0.9,
-                    "rationale": "Excellent profile fit",
+                    "rationale": "分数匹配，专业对口",
                 }
             ],
-            "action_items": ["Submit application by Nov 1", "Prepare recommendation letters"],
+            "action_items": ["建议优先填报提前批", "准备好综合素质评价材料"],
         }
 
         report = await save_report(model_response, self.BASE_STUDENT)
@@ -41,33 +44,22 @@ class TestReportGenerator:
         assert "report_id" in report
         assert "generated_at" in report
         assert len(report["recommendations"]) == 1
-        assert report["recommendations"][0]["university"] == "MIT"
+        assert report["recommendations"][0]["university"] == "深圳大学"
         assert len(report["action_items"]) == 2
 
     async def test_student_summary_filters_keys(self, monkeypatch, tmp_path):
         test_dir = tmp_path / "output"
         monkeypatch.setattr("services.report_generator.DATA_OUTPUT_DIR", test_dir)
 
-        student_info = {
-            "full_name": "Alice",
-            "email": "alice@example.com",
-            "high_school": "West High",
-            "gpa": 3.9,
-            "intended_majors": ["Biology"],
-            "phone": "1234567890",  # should be filtered out
-            "sat_score": 1500,  # should be filtered out
-        }
-
-        report = await save_report({}, student_info)
+        report = await save_report({}, self.BASE_STUDENT)
 
         summary = report["student_summary"]
-        assert summary["full_name"] == "Alice"
-        assert summary["email"] == "alice@example.com"
-        assert summary["high_school"] == "West High"
-        assert summary["gpa"] == 3.9
-        assert summary["intended_majors"] == ["Biology"]
-        assert "phone" not in summary
-        assert "sat_score" not in summary
+        assert summary["subjectTrack"] == "理科"
+        assert summary["province"] == "广东"
+        assert summary["score"] == 610
+        assert "skills" not in summary  # filtered out
+        assert "dislikes" not in summary  # filtered out
+        assert "preferences" not in summary  # filtered out
 
     async def test_writes_json_file_to_disk(self, monkeypatch, tmp_path):
         test_dir = tmp_path / "output"
