@@ -48,4 +48,4 @@ top 和 cautious 的汇总列表。
 
 ---
 
-注意：返回的 JSON 必须合法、完整。matchScore 和 competitiveness 是 0-100 的整数。确保每个推荐都有完整的 yearPlan。
+注意：只返回合法的 JSON，不要包含 markdown 代码块标记（不要使用 ```）。matchScore 和 competitiveness 是 0-100 的整数。确保每个推荐都有完整的 yearPlan。

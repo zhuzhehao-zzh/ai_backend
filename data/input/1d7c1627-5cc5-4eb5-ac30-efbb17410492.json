@@ -1,0 +1,13 @@
+{
+  "subjectTrack": "理科",
+  "province": "广东",
+  "score": 610,
+  "interests": "写代码、研究 AI",
+  "skills": "数学能力、逻辑推理",
+  "preferences": "高收入潜力、技术壁垒",
+  "preferredCities": [
+    "深圳",
+    "杭州"
+  ],
+  "dislikes": "不想学医"
+}
