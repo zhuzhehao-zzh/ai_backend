@@ -25,7 +25,13 @@ async def generate_report(data_path: Path, prompt_template_path: Path) -> dict:
 
     # 2. Load and render prompt template
     template = prompt_template_path.read_text(encoding="utf-8")
-    prompt = template.format(**data)
+    # Fill missing keys with empty strings so template.format() never KeyErrors
+    defaults = {k: "" for k in ("full_name", "email", "high_school", "graduation_year",
+                                 "gpa", "sat_score", "act_score", "intended_majors",
+                                 "coursework", "preferred_regions", "budget_range",
+                                 "extracurriculars", "awards", "personal_statement")}
+    defaults.update(data)
+    prompt = template.format(**defaults)
 
     logger.info(
         "Calling model with data from %s and template %s",

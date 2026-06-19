@@ -1,0 +1,55 @@
+{
+  "report_id": "08fce107-b9a4-4aee-8190-2f79ca31cc5e",
+  "generated_at": "2026-06-19T13:00:53.293774+00:00",
+  "student_summary": {
+    "full_name": "Zhang Wei",
+    "email": "zhangwei@example.com",
+    "high_school": "Beijing No.4 High",
+    "gpa": 3.8,
+    "intended_majors": [
+      "CS",
+      "Math"
+    ]
+  },
+  "recommendations": [
+    {
+      "university": "Tsinghua University",
+      "major": "Computer Science",
+      "match_score": 0.8,
+      "rationale": "Tsinghua University is recognized for its strong programs in both Computer Science and Mathematics. Zhang Wei's GPA and SAT score are competitive, making this a strong match."
+    },
+    {
+      "university": "Peking University",
+      "major": "Mathematics",
+      "match_score": 0.9,
+      "rationale": "Peking University has a prestigious Mathematics department and Zhang Wei's strong GPA and SAT score align well with the university's academic standards."
+    },
+    {
+      "university": "University of Science and Technology of China",
+      "major": "Computer Science",
+      "match_score": 0.7,
+      "rationale": "USTC is known for its focus on science and technology. Zhang Wei's intended major in CS is a good fit here, and the university's admission criteria align with his profile."
+    },
+    {
+      "university": "Shanghai Jiao Tong University",
+      "major": "Computer Science",
+      "match_score": 0.75,
+      "rationale": "SJTU's computer science program is well-regarded. Zhang Wei's strong academic profile makes him a competitive candidate for this university."
+    },
+    {
+      "university": "Fudan University",
+      "major": "Mathematics",
+      "match_score": 0.85,
+      "rationale": "Fudan University has a strong reputation in Mathematics. Zhang Wei's academic strengths and interest in the major make this a suitable choice."
+    }
+  ],
+  "action_items": [
+    "Research scholarship opportunities at each university, especially for international students.",
+    "Prepare for the TOEFL or IELTS if English is not the primary language of instruction at Zhang Wei's high school.",
+    "Identify and participate in relevant extracurricular activities to strengthen the application, such as coding clubs or math competitions.",
+    "Draft a compelling personal statement that highlights Zhang Wei's passion for CS and Math, and any relevant projects or experiences.",
+    "Gather letters of recommendation from teachers who can speak to Zhang Wei's abilities and achievements in CS and Math.",
+    "Check application deadlines for each university and prioritize application preparation accordingly.",
+    "Consider retaking the SAT to aim for a higher score if it can significantly improve competitiveness for more selective universities."
+  ]
+}

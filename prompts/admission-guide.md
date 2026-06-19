@@ -43,7 +43,7 @@ Return a valid JSON object with exactly these two keys:
   "action_items": [
     "string"
   ]
-}
+}}
 ```
 
 - **recommendations**: 3-5 universities with suggested majors, a match score (0.0 low to 1.0 high), and a brief rationale explaining why.

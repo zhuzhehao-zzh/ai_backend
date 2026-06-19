@@ -1,0 +1,18 @@
+{
+  "full_name": "Zhang Wei",
+  "email": "zhangwei@example.com",
+  "high_school": "Beijing No.4 High School",
+  "gpa": 3.8,
+  "sat_score": 1450,
+  "intended_majors": [
+    "Computer Science",
+    "Mathematics"
+  ],
+  "coursework": [],
+  "preferred_regions": [],
+  "extracurriculars": [
+    "Math Club",
+    "Basketball"
+  ],
+  "awards": []
+}
