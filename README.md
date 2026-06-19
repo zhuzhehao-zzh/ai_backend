@@ -150,25 +150,44 @@ Receives student Gaokao (高考) information and returns a college guidance repo
 {
   "report_id": "a1b2c3d4-...",
   "generated_at": "2026-06-19T21:00:00+00:00",
-  "student_summary": {
-    "subjectTrack": "理科",
+  "profileSummary": {
+    "cluster": "技术探索型",
     "province": "广东",
-    "score": 610,
-    "interests": "写代码、研究 AI、解决工程问题",
+    "score": "610",
+    "subjectTrack": "理科",
     "preferredCities": ["深圳", "杭州"]
   },
-  "recommendations": [
+  "top": [
     {
-      "university": "深圳大学",
-      "major": "计算机科学与技术",
-      "match_score": 0.9,
-      "rationale": "分数匹配，专业实力强"
+      "id": "software-engineering",
+      "name": "软件工程",
+      "recommendationBand": "强推荐",
+      "matchScore": 96,
+      "aiRisk": "低",
+      "outlook": "稳定增长，但基础编码岗位门槛提高",
+      "competitiveness": 94,
+      "summary": "学生的逻辑能力和 AI 兴趣高度匹配",
+      "schoolStrategy": "优先考虑计算机学科实力强、产业资源丰富的城市",
+      "cities": [{"name": "深圳", "note": "AI 应用、智能硬件和金融科技岗位密集"}],
+      "companies": [{"name": "华为"}, {"name": "腾讯"}],
+      "roles": [
+        {
+          "id": "ai-application-engineer",
+          "name": "AI 应用工程师",
+          "currentDemand": "企业需要能把大模型能力接入真实业务的人才",
+          "requirements": ["Python", "大模型 API", "Web 开发"]
+        }
+      ],
+      "yearPlan": {
+        "year1": ["学习 Python 或 Java", "学习高等数学和线性代数"],
+        "year2": ["学习数据结构与算法", "掌握数据库和计算机网络"],
+        "year3": ["学习机器学习和大模型应用", "完成 AI 项目"],
+        "year4": ["准备校招笔试面试", "复盘实习项目"]
+      }
     }
   ],
-  "action_items": [
-    "建议优先填报提前批",
-    "准备好综合素质评价材料"
-  ]
+  "cautious": [],
+  "all": []
 }
 ```
 
@@ -261,8 +280,8 @@ The test suite covers **23 test cases** across 4 test files:
 |---|---|---|
 | `tests/test_models.py` | 7 | Pydantic validation — required fields, score range (0-750), empty defaults |
 | `tests/test_consolidator.py` | 4 | File creation, JSON data fidelity, optional fields, directory creation |
-| `tests/test_report_generator.py` | 5 | Report structure, `student_summary` filtering, disk output, empty defaults |
-| `tests/test_api.py` | 7 | Full integration: success path, validation errors, file I/O chain, response structure |
+| `tests/test_report_generator.py` | 5 | Report wrapping, `profileSummary`/`top`/`cautious`/`all` pass-through, yearPlan validation |
+| `tests/test_api.py` | 7 | Full integration: success path, rich nested response, validation errors, file I/O chain |
 
 ### Run tests
 

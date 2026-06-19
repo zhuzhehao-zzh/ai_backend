@@ -44,16 +44,15 @@ async def generate_report(data_path: Path, prompt_template_path: Path) -> dict:
             {
                 "role": "system",
                 "content": (
-                    "You are a college admissions consultant. "
-                    "Analyze the student's profile and return a JSON report "
-                    "with recommendations and action items."
+                    "你是一位专业的高考志愿填报顾问。"
+                    "根据学生信息返回结构化的 JSON 推荐报告。"
                 ),
             },
             {"role": "user", "content": prompt},
         ],
         response_format={"type": "json_object"},
         temperature=0.7,
-        max_tokens=2000,
+        max_tokens=4000,
     )
 
     # 4. Parse response

@@ -65,10 +65,11 @@ class ErrorResponse(BaseModel):
 
 
 class SubmitResponse(BaseModel):
-    """Successful submission response with the generated report."""
+    """Successful submission response — passes through model output with metadata."""
 
     report_id: str
     generated_at: str
-    student_summary: dict
-    recommendations: list[dict]
-    action_items: list[str]
+    profileSummary: dict
+    top: list[dict]
+    cautious: list[dict]
+    all: list[dict]

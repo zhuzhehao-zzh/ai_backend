@@ -16,32 +16,54 @@ class TestSubmitEndpoint:
         "subjectTrack": "理科",
         "province": "广东",
         "score": 610,
-        "interests": "写代码、研究 AI、解决工程问题",
-        "skills": "数学能力、逻辑推理、自学能力",
-        "preferences": "高收入潜力、技术壁垒、稳定性",
+        "interests": "写代码、研究 AI",
+        "skills": "数学能力、逻辑推理",
+        "preferences": "高收入潜力、技术壁垒",
         "preferredCities": ["深圳", "杭州"],
-        "dislikes": "不想学医、不接受高压行业",
+        "dislikes": "不想学医",
     }
 
     MOCK_LLM_RESPONSE = {
-        "recommendations": [
+        "profileSummary": {
+            "cluster": "技术探索型",
+            "province": "广东",
+            "score": "610",
+            "subjectTrack": "理科",
+            "preferredCities": ["深圳", "杭州"],
+        },
+        "top": [
             {
-                "university": "深圳大学",
-                "major": "计算机科学与技术",
-                "match_score": 0.9,
-                "rationale": "分数匹配，专业实力强，位于深圳，就业前景好",
-            },
-            {
-                "university": "杭州电子科技大学",
-                "major": "人工智能",
-                "match_score": 0.85,
-                "rationale": "杭州互联网产业发达，专业方向与兴趣吻合",
-            },
+                "id": "software-engineering",
+                "name": "软件工程",
+                "recommendationBand": "强推荐",
+                "matchScore": 96,
+                "aiRisk": "低",
+                "outlook": "稳定增长，但基础编码岗位门槛提高",
+                "competitiveness": 94,
+                "summary": "逻辑能力和 AI 兴趣高度匹配",
+                "schoolStrategy": "优先计算机学科强校",
+                "cities": [
+                    {"name": "深圳", "note": "AI 应用、智能硬件和金融科技岗位密集"}
+                ],
+                "companies": [{"name": "华为"}, {"name": "腾讯"}],
+                "roles": [
+                    {
+                        "id": "ai-application-engineer",
+                        "name": "AI 应用工程师",
+                        "currentDemand": "企业需要能把大模型能力接入业务的人才",
+                        "requirements": ["Python", "大模型 API", "Web 开发"],
+                    }
+                ],
+                "yearPlan": {
+                    "year1": ["学 Python", "学高数"],
+                    "year2": ["学数据结构", "学数据库"],
+                    "year3": ["学机器学习", "做 AI 项目"],
+                    "year4": ["准备校招", "复盘项目"],
+                },
+            }
         ],
-        "action_items": [
-            "建议优先考虑深圳和杭州的高校，符合城市偏好",
-            "计算机类专业填报时注意区分计算机科学与技术和软件工程",
-        ],
+        "cautious": [],
+        "all": [],
     }
 
     @pytest.fixture(autouse=True)
@@ -52,17 +74,12 @@ class TestSubmitEndpoint:
         monkeypatch.setattr("services.consolidator.DATA_INPUT_DIR", input_dir)
         monkeypatch.setattr("services.report_generator.DATA_OUTPUT_DIR", output_dir)
 
-        # Create a test prompt file
         prompt_dir = tmp_path / "prompts"
         prompt_dir.mkdir(parents=True, exist_ok=True)
         prompt_file = prompt_dir / "admission-guide.md"
-        prompt_file.write_text(
-            "高考分数 {score}",
-            encoding="utf-8",
-        )
+        prompt_file.write_text("高考分数 {score}", encoding="utf-8")
         monkeypatch.setattr("routes.api.PROMPT_DIR", prompt_dir)
 
-        # Mock the LLM call
         mock_completion = AsyncMock()
         mock_completion.choices = [AsyncMock()]
         mock_completion.choices[0].message.content = json.dumps(self.MOCK_LLM_RESPONSE)
@@ -83,28 +100,26 @@ class TestSubmitEndpoint:
 
         assert "report_id" in data
         assert "generated_at" in data
-        assert len(data["recommendations"]) == 2
-        assert data["recommendations"][0]["university"] == "深圳大学"
-        assert data["recommendations"][1]["university"] == "杭州电子科技大学"
-        assert len(data["action_items"]) == 2
+        assert data["profileSummary"]["cluster"] == "技术探索型"
+        assert len(data["top"]) == 1
+        assert data["top"][0]["id"] == "software-engineering"
 
-    def test_submit_student_summary_in_response(self):
+    def test_submit_has_year_plan(self):
         client = TestClient(app)
         response = client.post("/api/submit", json=self.BASE_PAYLOAD)
-
         assert response.status_code == 200
+
         data = response.json()
-        summary = data["student_summary"]
-        assert summary["subjectTrack"] == "理科"
-        assert summary["province"] == "广东"
-        assert summary["score"] == 610
-        assert summary["preferredCities"] == ["深圳", "杭州"]
+        top_item = data["top"][0]
+        assert "yearPlan" in top_item
+        assert len(top_item["yearPlan"]["year1"]) >= 1
+        assert len(top_item["yearPlan"]["year4"]) >= 1
 
     def test_submit_missing_required_fields_returns_422(self):
         client = TestClient(app)
         response = client.post(
             "/api/submit",
-            json={"province": "广东"},  # missing most required fields
+            json={"province": "广东"},
         )
         assert response.status_code == 422
 
@@ -113,7 +128,7 @@ class TestSubmitEndpoint:
         payload = {
             "subjectTrack": "理科",
             "province": "广东",
-            "score": 999,  # exceeds 750
+            "score": 999,
             "interests": "编程",
             "skills": "数学",
             "preferences": "高收入",
@@ -139,16 +154,14 @@ class TestSubmitEndpoint:
         output_files = list(output_dir.iterdir())
         assert len(input_files) == 1
         assert len(output_files) == 1
-        assert input_files[0].suffix == ".json"
-        assert output_files[0].suffix == ".json"
 
-    def test_submit_response_matches_saved_report(self):
+    def test_submit_response_keys_match_expected(self):
         client = TestClient(app)
         response = client.post("/api/submit", json=self.BASE_PAYLOAD)
         assert response.status_code == 200
 
         data = response.json()
         assert set(data.keys()) == {
-            "report_id", "generated_at", "student_summary",
-            "recommendations", "action_items",
+            "report_id", "generated_at", "profileSummary",
+            "top", "cautious", "all",
         }

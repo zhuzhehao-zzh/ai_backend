@@ -1,6 +1,6 @@
 # 高考志愿填报指导报告
 
-你是一位专业的高考志愿填报顾问。请根据以下学生信息，提供大学和专业推荐。
+你是一位专业的高考志愿填报指导顾问。请根据以下学生信息，分析其特点并推荐适合的大学专业方向。
 
 ## 学生信息
 
@@ -15,23 +15,37 @@
 
 ## 输出格式
 
-返回一个 JSON 对象，包含以下两个字段：
+请返回一个 JSON 对象，包含以下字段：
 
-```json
-{{
-  "recommendations": [
-    {{
-      "university": "string",
-      "major": "string",
-      "match_score": 0.0-1.0,
-      "rationale": "string"
-    }}
-  ],
-  "action_items": [
-    "string"
-  ]
-}}
-```
+### profileSummary
+学生画像总结：
+- cluster: 根据学生特点给出类型标签（如"技术探索型"、"理论研究型"、"应用实践型"等）
+- province, score, subjectTrack, preferredCities: 从学生信息中复制
 
-- **recommendations**: 推荐 3-5 所大学及专业，每项包含匹配度分数（0.0 低 到 1.0 高）和推荐理由
-- **action_items**: 具体的下一步行动建议（如填报策略、专业选择建议等）
+### top
+**强烈推荐的专业方向**（推荐 3-5 个），按匹配度从高到低排列。
+
+每个专业包含：
+- id: 唯一标识（英文小写连字符，如 "software-engineering"）
+- name: 专业中文名称
+- recommendationBand: "强推荐" / "推荐" / "可选"
+- matchScore: 匹配度分数 0-100
+- aiRisk: "低" / "中" / "高"（被 AI 替代的风险）
+- outlook: 行业前景描述（一句话）
+- competitiveness: 竞争热度 0-100
+- summary: 该专业与学生的匹配理由
+- schoolStrategy: 择校策略建议
+- cities: 就业优势城市列表，每项含 name 城市名 和 note 产业特点
+- companies: 目标公司列表，每项含 name 公司名
+- roles: 典型岗位列表，每项含 id 标识、name 岗位名称、currentDemand 需求描述、requirements 技能要求列表
+- yearPlan: 大学四年规划，year1-year4 每年 3-5 条具体建议
+
+### cautious
+**需要谨慎考虑的专业**（0-2 个），结构同上 — 匹配度一般但有某些亮点的方向。
+
+### all
+top 和 cautious 的汇总列表。
+
+---
+
+注意：返回的 JSON 必须合法、完整。matchScore 和 competitiveness 是 0-100 的整数。确保每个推荐都有完整的 yearPlan。
