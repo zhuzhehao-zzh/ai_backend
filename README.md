@@ -11,7 +11,7 @@ A Python-based AI backend service that helps students fill out their college app
 | **Runtime** | Python 3.11+ |
 | **Framework** | [FastAPI](https://fastapi.tiangolo.com/) + Uvicorn |
 | **Validation** | [Pydantic v2](https://docs.pydantic.dev/latest/) |
-| **LLM Client** | [OpenAI SDK](https://github.com/openai/openai-python) (AsyncOpenAI) |
+| **LLM Client** | [OpenAI SDK](https://github.com/openai/openai-python) (AsyncOpenAI, pointed at Moonshot AI) |
 | **File I/O** | aiofiles (async) |
 | **Config** | python-dotenv (`.env`) |
 
@@ -91,7 +91,7 @@ ai_backend/
 │             3. MODEL PIPELINE (services/model_pipeline.py)   │
 │     Reads data JSON + prompt template                        │
 │     Renders template with student data                       │
-│     Calls OpenAI (gpt-4o-mini, response_format=json_object)  │
+│     Calls Kimi (moonshot-v1-8k, response_format=json_object)  │
 │     Parses JSON response → recommendations + action_items    │
 └──────────────────────────┬───────────────────────────────────┘
                            │
@@ -217,7 +217,7 @@ Receives student form data and returns a college application guidance report.
 ### Prerequisites
 
 - Python 3.11+
-- An [OpenAI API key](https://platform.openai.com/api-keys)
+- A [Moonshot AI (Kimi) API key](https://platform.moonshot.ai/)
 
 ### Installation
 
@@ -235,7 +235,7 @@ source venv/bin/activate   # Linux/macOS
 pip install -r requirements.txt
 
 # Set your API key
-echo "OPENAI_API_KEY=sk-..." > .env
+echo "MOONSHOT_API_KEY=sk-..." > .env
 ```
 
 ### Run the server
@@ -289,7 +289,7 @@ The test suite covers **27 test cases** across 4 test files:
 
 Tests use:
 - `tmp_path` — isolated temp directories so no real data is touched
-- `monkeypatch` — replaces module-level paths and the OpenAI call with mocks
+- `monkeypatch` — replaces module-level paths and the LLM call with mocks
 - `AsyncMock` — simulates the LLM response without calling the real API
 
 ---
@@ -298,12 +298,14 @@ Tests use:
 
 | Environment variable | Required | Description |
 |---|---|---|
-| `OPENAI_API_KEY` | Yes | Your OpenAI API key for LLM calls |
+| `MOONSHOT_API_KEY` | Yes | Your Moonshot AI (Kimi) API key |
+| `MOONSHOT_BASE_URL` | No | API base URL (default: `https://api.moonshot.ai/v1`) |
+| `MOONSHOT_MODEL` | No | Model ID (default: `moonshot-v1-8k`) |
 
 Create a `.env` file in the project root:
 
 ```
-OPENAI_API_KEY=sk-your-key-here
+MOONSHOT_API_KEY=sk-your-key-here
 ```
 
 ---

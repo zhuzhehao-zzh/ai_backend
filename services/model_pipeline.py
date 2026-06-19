@@ -2,13 +2,19 @@
 
 import json
 import logging
+import os
 from pathlib import Path
 
 from openai import AsyncOpenAI
 
 logger = logging.getLogger(__name__)
 
-client = AsyncOpenAI()  # reads OPENAI_API_KEY from .env
+# Moonshot AI (Kimi) — OpenAI-compatible, just swap base_url & model.
+# Base URL can be overridden via MOONSHOT_BASE_URL env var.
+client = AsyncOpenAI(
+    base_url=os.getenv("MOONSHOT_BASE_URL", "https://api.moonshot.ai/v1"),
+    api_key=os.getenv("MOONSHOT_API_KEY"),
+)
 
 
 async def generate_report(data_path: Path, prompt_template_path: Path) -> dict:
@@ -27,9 +33,9 @@ async def generate_report(data_path: Path, prompt_template_path: Path) -> dict:
         prompt_template_path.name,
     )
 
-    # 3. Call OpenAI
+    # 3. Call Moonshot AI (Kimi)
     response = await client.chat.completions.create(
-        model="gpt-4o-mini",
+        model=os.getenv("MOONSHOT_MODEL", "moonshot-v1-8k"),
         messages=[
             {
                 "role": "system",

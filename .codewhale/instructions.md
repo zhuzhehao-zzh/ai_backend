@@ -4,7 +4,7 @@
 - **Runtime**: Python 3.11+
 - **Framework**: FastAPI + Uvicorn
 - **Validation**: Pydantic v2
-- **Model**: OpenAI SDK (gpt-4o / gpt-4o-mini)
+- **Model**: Moonshot AI (Kimi) via OpenAI-compatible SDK (default: moonshot-v1-8k)
 - **Config**: python-dotenv (.env)
 
 ## Data Flow

@@ -2,6 +2,7 @@
 
 import os
 
-# Set a dummy API key so AsyncOpenAI() can be instantiated at import time.
-# Real calls are mocked in individual test classes.
-os.environ.setdefault("OPENAI_API_KEY", "test-skip-key")
+# Set dummy API key + base URL so the LLM client can be instantiated
+# at import time.  Real calls are mocked in individual test classes.
+os.environ.setdefault("MOONSHOT_API_KEY", "test-skip-key")
+os.environ.setdefault("MOONSHOT_BASE_URL", "https://api.moonshot.ai/v1")
