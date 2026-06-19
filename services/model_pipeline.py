@@ -20,13 +20,11 @@ def _extract_json(raw: str) -> dict:
     """Try to parse JSON; fallback: extract from markdown code block."""
     raw = raw.strip()
 
-    # Direct parse first
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
         pass
 
-    # Try extracting from ```json ... ``` block
     m = re.search(r"```(?:json)?\s*\n?(.*?)\n?```", raw, re.DOTALL)
     if m:
         try:
@@ -34,7 +32,6 @@ def _extract_json(raw: str) -> dict:
         except json.JSONDecodeError:
             pass
 
-    # Try finding the first `{` to the last `}`
     start = raw.find("{")
     end = raw.rfind("}")
     if start != -1 and end > start:
@@ -43,26 +40,26 @@ def _extract_json(raw: str) -> dict:
         except json.JSONDecodeError:
             pass
 
-    raise ValueError(f"Could not extract valid JSON from model response.\n"
-                     f"Response preview (first 500 chars):\n{raw[:500]}")
+    raise ValueError(
+        f"Could not extract valid JSON from model response.\n"
+        f"Response preview (first 500 chars):\n{raw[:500]}"
+    )
 
 
 async def generate_report(data_path: Path, prompt_template_path: Path) -> dict:
     """Load data + prompt, call the model, return parsed JSON report."""
-    raw = data_path.read_text(encoding="utf-8")
-    data = json.loads(raw)
-
+    data = json.loads(data_path.read_text(encoding="utf-8"))
     template = prompt_template_path.read_text(encoding="utf-8")
-    defaults = {k: "" for k in ("subjectTrack", "province", "score", "interests",
-                                 "skills", "preferences", "preferredCities", "dislikes")}
-    defaults.update(data)
-    prompt = template.format(**defaults)
 
-    logger.info(
-        "Calling model with data from %s and template %s",
-        data_path.name,
-        prompt_template_path.name,
+    # Embed the entire student data as a JSON string in the prompt.
+    # This makes the template field-agnostic — any fields the frontend
+    # sends are visible to the model.
+    prompt = template.replace(
+        "{student_data}",
+        json.dumps(data, indent=2, ensure_ascii=False),
     )
+
+    logger.info("Calling model with data from %s", data_path.name)
 
     response = await client.chat.completions.create(
         model=os.getenv("MOONSHOT_MODEL", "moonshot-v1-8k"),
@@ -80,5 +77,4 @@ async def generate_report(data_path: Path, prompt_template_path: Path) -> dict:
     content = response.choices[0].message.content
     logger.info("Model response received (%s chars)", len(content))
 
-    report = _extract_json(content)
-    return report
+    return _extract_json(content)

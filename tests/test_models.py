@@ -1,102 +1,41 @@
-"""Tests for Pydantic model validation."""
+"""Tests for Pydantic response model validation."""
 
 import pytest
 from pydantic import ValidationError
 
-from models.submission import StudentInfo
+from models.submission import SubmitResponse
 
 
-class TestStudentInfo:
-    """StudentInfo model — required fields, ranges, defaults."""
+class TestSubmitResponse:
+    """SubmitResponse — required fields only."""
 
-    def test_valid_full_data(self):
-        data = {
-            "subjectTrack": "理科",
-            "province": "广东",
-            "score": 610,
-            "interests": "写代码、研究 AI",
-            "skills": "数学能力、逻辑推理",
-            "preferences": "高收入潜力、技术壁垒",
-            "preferredCities": ["深圳", "杭州"],
-            "dislikes": "不想学医",
-        }
-        info = StudentInfo(**data)
-        assert info.subjectTrack == "理科"
-        assert info.province == "广东"
-        assert info.score == 610
-        assert info.preferredCities == ["深圳", "杭州"]
-
-    def test_minimal_required_fields_only(self):
-        info = StudentInfo(
-            subjectTrack="理科",
-            province="广东",
-            score=600,
-            interests="编程",
-            skills="数学",
-            preferences="高收入",
-            dislikes="学医",
+    def test_valid_response(self):
+        resp = SubmitResponse(
+            report_id="abc-123",
+            generated_at="2026-01-01T00:00:00Z",
+            profileSummary={"cluster": "技术探索型"},
+            top=[{"id": "cs", "name": "计算机科学"}],
+            cautious=[],
+            all=[],
         )
-        assert info.preferredCities == []
+        assert resp.report_id == "abc-123"
+        assert resp.top[0]["name"] == "计算机科学"
 
     def test_missing_required_field_fails(self):
         with pytest.raises(ValidationError):
-            StudentInfo()  # missing all required fields
-
-    def test_empty_province_fails(self):
-        with pytest.raises(ValidationError):
-            StudentInfo(
-                subjectTrack="理科",
-                province="",
-                score=600,
-                interests="编程",
-                skills="数学",
-                preferences="高收入",
-                dislikes="学医",
+            SubmitResponse(
+                report_id="abc",
+                generated_at="...",
+                # missing profileSummary, top, cautious, all
             )
 
-    def test_score_below_zero_fails(self):
-        with pytest.raises(ValidationError):
-            StudentInfo(
-                subjectTrack="理科",
-                province="广东",
-                score=-1,
-                interests="编程",
-                skills="数学",
-                preferences="高收入",
-                dislikes="学医",
-            )
-
-    def test_score_above_750_fails(self):
-        with pytest.raises(ValidationError):
-            StudentInfo(
-                subjectTrack="理科",
-                province="广东",
-                score=751,
-                interests="编程",
-                skills="数学",
-                preferences="高收入",
-                dislikes="学医",
-            )
-
-    def test_score_at_boundaries_succeeds(self):
-        info_min = StudentInfo(
-            subjectTrack="文科",
-            province="北京",
-            score=0,
-            interests="a",
-            skills="b",
-            preferences="c",
-            dislikes="d",
+    def test_empty_lists_are_valid(self):
+        resp = SubmitResponse(
+            report_id="x",
+            generated_at="now",
+            profileSummary={},
+            top=[],
+            cautious=[],
+            all=[],
         )
-        assert info_min.score == 0
-
-        info_max = StudentInfo(
-            subjectTrack="文科",
-            province="北京",
-            score=750,
-            interests="a",
-            skills="b",
-            preferences="c",
-            dislikes="d",
-        )
-        assert info_max.score == 750
+        assert resp.top == []

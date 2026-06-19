@@ -119,9 +119,13 @@ ai_backend/
 
 ### `POST /api/submit`
 
-Receives student Gaokao (高考) information and returns a college guidance report.
+Receives any JSON object with student information and returns a college guidance report.
 
-**Request Body** (JSON):
+The API is **field-agnostic** on input — whatever keys and values the frontend sends are
+saved and passed to the LLM as-is.  There is no field-level validation; the LLM
+determines which fields are meaningful.
+
+**Request Body** (any JSON object):
 
 ```json
 {
@@ -136,13 +140,7 @@ Receives student Gaokao (高考) information and returns a college guidance repo
 }
 ```
 
-**Required fields**: `subjectTrack`, `province`, `score`, `interests`, `skills`, `preferences`, `dislikes`
-
-**Validation rules**:
-| Field | Constraint |
-|---|---|
-| `score` | 0 – 750 |
-| `province` | min length 1 |
+**No required fields** — any valid JSON object is accepted.
 
 **Success Response** (200):
 
@@ -274,14 +272,14 @@ curl -X POST http://localhost:8000/api/submit \
 
 ## Testing
 
-The test suite covers **23 test cases** across 4 test files:
+The test suite covers **17 test cases** across 4 test files:
 
 | File | Tests | Focus |
 |---|---|---|
-| `tests/test_models.py` | 7 | Pydantic validation — required fields, score range (0-750), empty defaults |
-| `tests/test_consolidator.py` | 4 | File creation, JSON data fidelity, optional fields, directory creation |
-| `tests/test_report_generator.py` | 5 | Report wrapping, `profileSummary`/`top`/`cautious`/`all` pass-through, yearPlan validation |
-| `tests/test_api.py` | 7 | Full integration: success path, rich nested response, validation errors, file I/O chain |
+| `tests/test_models.py` | 3 | `SubmitResponse` — required fields, empty lists |
+| `tests/test_consolidator.py` | 4 | File creation, dict fidelity, empty dict, directory creation |
+| `tests/test_report_generator.py` | 5 | Metadata wrapping, key pass-through, disk output, empty output |
+| `tests/test_api.py` | 5 | Full integration: arbitrary fields, minimal payload, empty object, rich response, file I/O |
 
 ### Run tests
 

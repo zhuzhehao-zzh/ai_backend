@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 DATA_OUTPUT_DIR = Path("data/output")
 
 
-async def save_report(model_response: dict, student_info: dict) -> dict:
+async def save_report(model_response: dict) -> dict:
     """Wrap model response with metadata and save to disk."""
     DATA_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -21,7 +21,7 @@ async def save_report(model_response: dict, student_info: dict) -> dict:
     report = {
         "report_id": report_id,
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        **model_response,  # pass through the full model output
+        **model_response,
     }
 
     filepath = DATA_OUTPUT_DIR / f"{report_id}.json"
