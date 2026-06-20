@@ -6,6 +6,8 @@
 
 {student_data}
 
+{historical_patterns}
+
 ## JSON 输出格式
 
 {

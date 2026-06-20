@@ -17,21 +17,17 @@ client = AsyncOpenAI(
 
 
 def _extract_json(raw: str) -> dict:
-    """Try to parse JSON; fallback: extract from markdown code block."""
     raw = raw.strip()
-
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
         pass
-
     m = re.search(r"```(?:json)?\s*\n?(.*?)\n?```", raw, re.DOTALL)
     if m:
         try:
             return json.loads(m.group(1).strip())
         except json.JSONDecodeError:
             pass
-
     start = raw.find("{")
     end = raw.rfind("}")
     if start != -1 and end > start:
@@ -39,21 +35,28 @@ def _extract_json(raw: str) -> dict:
             return json.loads(raw[start : end + 1])
         except json.JSONDecodeError:
             pass
-
     raise ValueError(
         f"Could not extract valid JSON from model response.\n"
         f"Response preview (first 500 chars):\n{raw[:500]}"
     )
 
 
-async def generate_report(data_path: Path, prompt_template_path: Path) -> dict:
-    """Load data + prompt, call the model, return parsed JSON report."""
+async def generate_report(
+    data_path: Path,
+    prompt_template_path: Path,
+    patterns: str = "",
+) -> dict:
+    """Load data + prompt (optionally enriched with patterns), call Kimi, parse response."""
     data = json.loads(data_path.read_text(encoding="utf-8"))
     template = prompt_template_path.read_text(encoding="utf-8")
 
-    # Embed the entire student data as a JSON string in the prompt.
-    # This makes the template field-agnostic — any fields the frontend
-    # sends are visible to the model.
+    # Inject historical patterns if available
+    if patterns:
+        template = template.replace("{historical_patterns}", patterns)
+    else:
+        template = template.replace("{historical_patterns}\n", "")
+
+    # Fill student data
     prompt = template.replace(
         "{student_data}",
         json.dumps(data, indent=2, ensure_ascii=False),

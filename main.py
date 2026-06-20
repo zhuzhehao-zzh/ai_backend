@@ -11,6 +11,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from routes.api import router as api_router
+from services.database import init_pool, close_pool
 
 logging.basicConfig(
     level=logging.INFO,
@@ -31,6 +32,26 @@ app.add_middleware(
 )
 
 app.include_router(api_router)
+
+
+@app.on_event("startup")
+async def startup():
+    """Initialize DB pool on app start."""
+    try:
+        await init_pool()
+        logger.info("Database pool initialized")
+    except Exception as e:
+        logger.warning("Database pool init failed (non-fatal): %s", e)
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    """Close DB pool on app shutdown."""
+    try:
+        await close_pool()
+        logger.info("Database pool closed")
+    except Exception as e:
+        logger.warning("Database pool close failed: %s", e)
 
 
 @app.get("/")
