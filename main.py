@@ -2,6 +2,8 @@
 
 import logging
 
+logger = logging.getLogger(__name__)
+
 from dotenv import load_dotenv
 
 # Load .env BEFORE any modules that read env vars (especially the LLM client)
