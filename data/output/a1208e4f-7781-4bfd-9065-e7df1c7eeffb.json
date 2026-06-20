@@ -1,0 +1,536 @@
+{
+  "report_id": "a1208e4f-7781-4bfd-9065-e7df1c7eeffb",
+  "generated_at": "2026-06-19T14:04:24.804753+00:00",
+  "profileSummary": {
+    "cluster": "技术探索型",
+    "province": "广东",
+    "score": 610,
+    "subjectTrack": "物理类",
+    "preferredCities": [
+      "深圳",
+      "杭州"
+    ]
+  },
+  "top": [
+    {
+      "id": "computer-science-and-technology",
+      "name": "计算机科学与技术",
+      "recommendationBand": "强推荐",
+      "matchScore": 95,
+      "aiRisk": "低",
+      "outlook": "AI时代的核心专业，技术发展快，需求持续增长",
+      "competitiveness": 80,
+      "summary": "该专业与学生的技能和兴趣高度匹配，适合学生发展AI和解决工程问题",
+      "schoolStrategy": "优先选择有较强师资力量和实验设施的学校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，IT企业众多"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网产业蓬勃发展，创业氛围浓厚"
+        }
+      ],
+      "companies": [
+        {
+          "name": "华为"
+        },
+        {
+          "name": "阿里巴巴"
+        },
+        {
+          "name": "腾讯"
+        }
+      ],
+      "roles": [
+        {
+          "id": "software-engineer",
+          "name": "软件工程师",
+          "currentDemand": "高，软件开发和维护需求大",
+          "requirements": [
+            "编程能力",
+            "系统设计",
+            "团队合作"
+          ]
+        },
+        {
+          "id": "ai-engineer",
+          "name": "人工智能工程师",
+          "currentDemand": "极高，AI技术发展迅速",
+          "requirements": [
+            "机器学习",
+            "数据分析",
+            "创新思维"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础编程语言（C/C++）",
+          "参加学校编程俱乐部",
+          "阅读计算机科学经典教材"
+        ],
+        "year2": [
+          "学习数据结构和算法",
+          "参与开源项目开发",
+          "学习数据库基础"
+        ],
+        "year3": [
+          "选择AI相关课程",
+          "实习于知名IT公司",
+          "参加编程竞赛"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备考研或就业",
+          "深入学习专业领域知识"
+        ]
+      }
+    },
+    {
+      "id": "information-security",
+      "name": "信息安全",
+      "recommendationBand": "推荐",
+      "matchScore": 88,
+      "aiRisk": "低",
+      "outlook": "网络安全重要性日益增加，专业人才需求旺盛",
+      "competitiveness": 75,
+      "summary": "信息安全与学生的技能和兴趣相匹配，符合高技术壁垒和不易被AI替代的特点",
+      "schoolStrategy": "选择有信息安全实验室和实战经验的学校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "信息安全行业发展迅速，对专业人才需求大"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网企业众多，对信息安全重视程度高"
+        }
+      ],
+      "companies": [
+        {
+          "name": "奇安信"
+        },
+        {
+          "name": "绿盟科技"
+        }
+      ],
+      "roles": [
+        {
+          "id": "security-analyst",
+          "name": "安全分析师",
+          "currentDemand": "高，网络安全事件频发，需要专业分析人员",
+          "requirements": [
+            "网络安全知识",
+            "应急响应能力",
+            "风险评估"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础网络知识",
+          "参加网络安全竞赛",
+          "学习编程语言"
+        ],
+        "year2": [
+          "学习操作系统和网络协议",
+          "参与实验室项目",
+          "学习密码学基础"
+        ],
+        "year3": [
+          "参与实际安全防护项目",
+          "到安全公司实习",
+          "学习安全法规和合规"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "深入学习攻防技术",
+          "准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "software-engineering",
+      "name": "软件工程",
+      "recommendationBand": "推荐",
+      "matchScore": 85,
+      "aiRisk": "低",
+      "outlook": "软件行业持续发展，对软件工程师需求稳定",
+      "competitiveness": 85,
+      "summary": "软件工程专业与学生的兴趣和技能相匹配，适合学生在软件开发领域发展",
+      "schoolStrategy": "选择有软件工程实验室和产学研合作项目的学校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "软件产业发展成熟，就业机会多"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网行业发展迅速，软件工程师需求大"
+        }
+      ],
+      "companies": [
+        {
+          "name": "百度"
+        },
+        {
+          "name": "字节跳动"
+        }
+      ],
+      "roles": [
+        {
+          "id": "app-developer",
+          "name": "应用开发工程师",
+          "currentDemand": "高，移动应用和互联网服务需求增长",
+          "requirements": [
+            "移动开发框架",
+            "前后端开发技术",
+            "用户体验设计"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习编程基础",
+          "参加编程马拉松",
+          "学习软件开发流程"
+        ],
+        "year2": [
+          "学习软件测试和质量保证",
+          "参与开源软件开发",
+          "学习项目管理"
+        ],
+        "year3": [
+          "实习于软件公司",
+          "参与大型软件项目开发",
+          "学习云计算和大数据技术"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研",
+          "深入学习专业领域知识"
+        ]
+      }
+    }
+  ],
+  "cautious": [
+    {
+      "id": "electrical-engineering",
+      "name": "电气工程及其自动化",
+      "recommendationBand": "可选",
+      "matchScore": 70,
+      "aiRisk": "低",
+      "outlook": "电气工程是传统行业，但智能化转型带来新机遇",
+      "competitiveness": 65,
+      "summary": "虽然与学生兴趣不是完全匹配，但电气工程中的自动化和智能控制部分与学生技能相关",
+      "schoolStrategy": "选择有电气工程实验室和智能电网研究方向的学校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "电气设备制造业发达，智能化转型需求大"
+        }
+      ],
+      "companies": [
+        {
+          "name": "比亚迪"
+        }
+      ],
+      "roles": [
+        {
+          "id": "automation-engineer",
+          "name": "自动化工程师",
+          "currentDemand": "稳定，工业自动化和智能制造需求增长",
+          "requirements": [
+            "自动化控制理论",
+            "PLC编程",
+            "系统集成"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础电路理论",
+          "参加电子设计竞赛",
+          "学习基础编程"
+        ],
+        "year2": [
+          "学习电机与拖动",
+          "参与实验室项目",
+          "学习自动控制原理"
+        ],
+        "year3": [
+          "实习于电气设备制造公司",
+          "学习智能电网技术",
+          "参与自动化项目"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研",
+          "深入学习专业领域知识"
+        ]
+      }
+    }
+  ],
+  "all": [
+    {
+      "id": "computer-science-and-technology",
+      "name": "计算机科学与技术",
+      "recommendationBand": "强推荐",
+      "matchScore": 95,
+      "aiRisk": "低",
+      "outlook": "AI时代的核心专业，技术发展快，需求持续增长",
+      "competitiveness": 80,
+      "summary": "该专业与学生的技能和兴趣高度匹配，适合学生发展AI和解决工程问题",
+      "schoolStrategy": "优先选择有较强师资力量和实验设施的学校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，IT企业众多"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网产业蓬勃发展，创业氛围浓厚"
+        }
+      ],
+      "companies": [
+        {
+          "name": "华为"
+        },
+        {
+          "name": "阿里巴巴"
+        },
+        {
+          "name": "腾讯"
+        }
+      ],
+      "roles": [
+        {
+          "id": "software-engineer",
+          "name": "软件工程师",
+          "currentDemand": "高，软件开发和维护需求大",
+          "requirements": [
+            "编程能力",
+            "系统设计",
+            "团队合作"
+          ]
+        },
+        {
+          "id": "ai-engineer",
+          "name": "人工智能工程师",
+          "currentDemand": "极高，AI技术发展迅速",
+          "requirements": [
+            "机器学习",
+            "数据分析",
+            "创新思维"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础编程语言（C/C++）",
+          "参加学校编程俱乐部",
+          "阅读计算机科学经典教材"
+        ],
+        "year2": [
+          "学习数据结构和算法",
+          "参与开源项目开发",
+          "学习数据库基础"
+        ],
+        "year3": [
+          "选择AI相关课程",
+          "实习于知名IT公司",
+          "参加编程竞赛"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备考研或就业",
+          "深入学习专业领域知识"
+        ]
+      }
+    },
+    {
+      "id": "information-security",
+      "name": "信息安全",
+      "recommendationBand": "推荐",
+      "matchScore": 88,
+      "aiRisk": "低",
+      "outlook": "网络安全重要性日益增加，专业人才需求旺盛",
+      "competitiveness": 75,
+      "summary": "信息安全与学生的技能和兴趣相匹配，符合高技术壁垒和不易被AI替代的特点",
+      "schoolStrategy": "选择有信息安全实验室和实战经验的学校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "信息安全行业发展迅速，对专业人才需求大"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网企业众多，对信息安全重视程度高"
+        }
+      ],
+      "companies": [
+        {
+          "name": "奇安信"
+        },
+        {
+          "name": "绿盟科技"
+        }
+      ],
+      "roles": [
+        {
+          "id": "security-analyst",
+          "name": "安全分析师",
+          "currentDemand": "高，网络安全事件频发，需要专业分析人员",
+          "requirements": [
+            "网络安全知识",
+            "应急响应能力",
+            "风险评估"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础网络知识",
+          "参加网络安全竞赛",
+          "学习编程语言"
+        ],
+        "year2": [
+          "学习操作系统和网络协议",
+          "参与实验室项目",
+          "学习密码学基础"
+        ],
+        "year3": [
+          "参与实际安全防护项目",
+          "到安全公司实习",
+          "学习安全法规和合规"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "深入学习攻防技术",
+          "准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "software-engineering",
+      "name": "软件工程",
+      "recommendationBand": "推荐",
+      "matchScore": 85,
+      "aiRisk": "低",
+      "outlook": "软件行业持续发展，对软件工程师需求稳定",
+      "competitiveness": 85,
+      "summary": "软件工程专业与学生的兴趣和技能相匹配，适合学生在软件开发领域发展",
+      "schoolStrategy": "选择有软件工程实验室和产学研合作项目的学校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "软件产业发展成熟，就业机会多"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网行业发展迅速，软件工程师需求大"
+        }
+      ],
+      "companies": [
+        {
+          "name": "百度"
+        },
+        {
+          "name": "字节跳动"
+        }
+      ],
+      "roles": [
+        {
+          "id": "app-developer",
+          "name": "应用开发工程师",
+          "currentDemand": "高，移动应用和互联网服务需求增长",
+          "requirements": [
+            "移动开发框架",
+            "前后端开发技术",
+            "用户体验设计"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习编程基础",
+          "参加编程马拉松",
+          "学习软件开发流程"
+        ],
+        "year2": [
+          "学习软件测试和质量保证",
+          "参与开源软件开发",
+          "学习项目管理"
+        ],
+        "year3": [
+          "实习于软件公司",
+          "参与大型软件项目开发",
+          "学习云计算和大数据技术"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研",
+          "深入学习专业领域知识"
+        ]
+      }
+    },
+    {
+      "id": "electrical-engineering",
+      "name": "电气工程及其自动化",
+      "recommendationBand": "可选",
+      "matchScore": 70,
+      "aiRisk": "低",
+      "outlook": "电气工程是传统行业，但智能化转型带来新机遇",
+      "competitiveness": 65,
+      "summary": "虽然与学生兴趣不是完全匹配，但电气工程中的自动化和智能控制部分与学生技能相关",
+      "schoolStrategy": "选择有电气工程实验室和智能电网研究方向的学校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "电气设备制造业发达，智能化转型需求大"
+        }
+      ],
+      "companies": [
+        {
+          "name": "比亚迪"
+        }
+      ],
+      "roles": [
+        {
+          "id": "automation-engineer",
+          "name": "自动化工程师",
+          "currentDemand": "稳定，工业自动化和智能制造需求增长",
+          "requirements": [
+            "自动化控制理论",
+            "PLC编程",
+            "系统集成"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础电路理论",
+          "参加电子设计竞赛",
+          "学习基础编程"
+        ],
+        "year2": [
+          "学习电机与拖动",
+          "参与实验室项目",
+          "学习自动控制原理"
+        ],
+        "year3": [
+          "实习于电气设备制造公司",
+          "学习智能电网技术",
+          "参与自动化项目"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研",
+          "深入学习专业领域知识"
+        ]
+      }
+    }
+  ]
+}

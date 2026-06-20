@@ -1,0 +1,576 @@
+{
+  "report_id": "73ab3ea9-8477-460b-a674-5a1fc063949c",
+  "generated_at": "2026-06-19T14:16:18.479007+00:00",
+  "profileSummary": {
+    "cluster": "技术探索型",
+    "province": "广东",
+    "score": 610,
+    "subjectTrack": "物理类",
+    "preferredCities": [
+      "深圳",
+      "杭州"
+    ]
+  },
+  "top": [
+    {
+      "id": "computer-science",
+      "name": "计算机科学与技术",
+      "recommendationBand": "强推荐",
+      "matchScore": 95,
+      "aiRisk": "低",
+      "outlook": "人工智能、大数据等领域需求持续增长",
+      "competitiveness": 80,
+      "summary": "学生对编程和AI研究表现出浓厚兴趣，且具备良好的数学和逻辑推理能力，适合深入学习计算机科学。",
+      "schoolStrategy": "优先考虑专业排名高和拥有较强研究背景的学校。",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，互联网企业众多"
+        },
+        {
+          "name": "杭州",
+          "note": "拥有阿里巴巴等大型互联网企业，数字经济发展迅速"
+        }
+      ],
+      "companies": [
+        {
+          "name": "腾讯"
+        },
+        {
+          "name": "华为"
+        },
+        {
+          "name": "阿里巴巴"
+        }
+      ],
+      "roles": [
+        {
+          "id": "software-engineer",
+          "name": "软件工程师",
+          "currentDemand": "高，尤其在互联网公司",
+          "requirements": [
+            "编程能力",
+            "算法理解",
+            "系统设计"
+          ]
+        },
+        {
+          "id": "data-scientist",
+          "name": "数据科学家",
+          "currentDemand": "增长迅速，特别是在大数据领域",
+          "requirements": [
+            "统计学",
+            "机器学习",
+            "数据挖掘"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "完成基础编程课程学习",
+          "参加学校编程俱乐部",
+          "阅读AI和机器学习相关书籍"
+        ],
+        "year2": [
+          "学习数据结构和算法",
+          "参与学校的科研项目",
+          "选择AI相关的选修课程"
+        ],
+        "year3": [
+          "参与专业相关的实习",
+          "参与算法竞赛",
+          "学习深度学习框架"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "参加行业招聘会",
+          "准备技术面试和简历"
+        ]
+      }
+    },
+    {
+      "id": "artificial-intelligence",
+      "name": "人工智能",
+      "recommendationBand": "推荐",
+      "matchScore": 90,
+      "aiRisk": "低",
+      "outlook": "AI技术在未来各领域都将扮演重要角色",
+      "competitiveness": 85,
+      "summary": "学生对AI有研究兴趣，数学和逻辑推理能力突出，适合学习人工智能领域。",
+      "schoolStrategy": "选择在AI领域有特色的院校，注重实践和项目经验的培养。",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "AI产业快速发展，对专业人才需求大"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网及AI领域有优秀企业，适合就业与发展"
+        }
+      ],
+      "companies": [
+        {
+          "name": "百度"
+        },
+        {
+          "name": "字节跳动"
+        }
+      ],
+      "roles": [
+        {
+          "id": "ai-engineer",
+          "name": "AI工程师",
+          "currentDemand": "极高，特别是在智能驾驶和机器人领域",
+          "requirements": [
+            "深度学习",
+            "自然语言处理",
+            "计算机视觉"
+          ]
+        },
+        {
+          "id": "machine-learning-expert",
+          "name": "机器学习专家",
+          "currentDemand": "高，特别是大型互联网公司",
+          "requirements": [
+            "算法优化",
+            "模型训练",
+            "数据挖掘"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础数学和统计学课程",
+          "参加编程马拉松活动",
+          "了解AI领域最新动态"
+        ],
+        "year2": [
+          "学习算法和数据结构",
+          "参与学校或在线的AI项目",
+          "参加相关竞赛"
+        ],
+        "year3": [
+          "深入学习机器学习和深度学习",
+          "实习于AI相关企业",
+          "准备学术论文或项目"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "参加行业交流会",
+          "准备技术面试"
+        ]
+      }
+    },
+    {
+      "id": "software-engineering",
+      "name": "软件工程",
+      "recommendationBand": "推荐",
+      "matchScore": 88,
+      "aiRisk": "低",
+      "outlook": "软件工程在数字化转型中扮演核心角色",
+      "competitiveness": 75,
+      "summary": "学生对编程有浓厚兴趣，并具备良好的自学能力，适合学习软件工程。",
+      "schoolStrategy": "选择实践项目丰富的学校，注重与企业的合作。",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "深圳是软件产业的重要基地"
+        },
+        {
+          "name": "杭州",
+          "note": "电子商务和互联网金融发展迅速"
+        }
+      ],
+      "companies": [
+        {
+          "name": "网易"
+        },
+        {
+          "name": "京东"
+        }
+      ],
+      "roles": [
+        {
+          "id": "frontend-developer",
+          "name": "前端开发工程师",
+          "currentDemand": "高，尤其是对于用户体验要求高的互联网公司",
+          "requirements": [
+            "HTML/CSS/JavaScript",
+            "框架使用",
+            "交互设计"
+          ]
+        },
+        {
+          "id": "backend-developer",
+          "name": "后端开发工程师",
+          "currentDemand": "持续增长，尤其在云服务和大数据领域",
+          "requirements": [
+            "服务器端编程",
+            "数据库管理",
+            "系统架构设计"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "完成基础编程和算法课程",
+          "参与开源项目",
+          "学习版本控制系统"
+        ],
+        "year2": [
+          "学习软件工程基础",
+          "参与团队项目开发",
+          "了解软件测试和质量保证"
+        ],
+        "year3": [
+          "深入学习系统架构",
+          "实习于软件开发企业",
+          "参加软件工程相关的竞赛"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "参加行业招聘会",
+          "准备技术面试和简历"
+        ]
+      }
+    }
+  ],
+  "cautious": [
+    {
+      "id": "information-security",
+      "name": "信息安全",
+      "recommendationBand": "可选",
+      "matchScore": 70,
+      "aiRisk": "低",
+      "outlook": "随着网络安全威胁增加，信息安全领域人才需求增长",
+      "competitiveness": 60,
+      "summary": "学生对解决工程问题感兴趣，信息安全领域需要技术深度和创新思维。",
+      "schoolStrategy": "选择课程设置全面、实验设施先进的学校。",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，对信息安全人才需求大"
+        }
+      ],
+      "companies": [
+        {
+          "name": "深信服"
+        }
+      ],
+      "roles": [
+        {
+          "id": "security-engineer",
+          "name": "安全工程师",
+          "currentDemand": "高，尤其是在金融和互联网行业",
+          "requirements": [
+            "网络协议",
+            "加密技术",
+            "安全审计"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础编程和网络安全课程",
+          "参与学校的安全实验室",
+          "了解最新的安全漏洞和攻击手段"
+        ],
+        "year2": [
+          "学习操作系统和网络基础",
+          "参加CTF（Capture The Flag）竞赛",
+          "学习密码学基础"
+        ],
+        "year3": [
+          "深入学习应用安全和系统安全",
+          "实习于信息安全公司",
+          "参与实际的安全项目"
+        ],
+        "year4": [
+          "完成毕业设计，涉及实际的安全问题",
+          "参加行业交流会",
+          "准备专业认证考试"
+        ]
+      }
+    }
+  ],
+  "all": [
+    {
+      "id": "computer-science",
+      "name": "计算机科学与技术",
+      "recommendationBand": "强推荐",
+      "matchScore": 95,
+      "aiRisk": "低",
+      "outlook": "人工智能、大数据等领域需求持续增长",
+      "competitiveness": 80,
+      "summary": "学生对编程和AI研究表现出浓厚兴趣，且具备良好的数学和逻辑推理能力，适合深入学习计算机科学。",
+      "schoolStrategy": "优先考虑专业排名高和拥有较强研究背景的学校。",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，互联网企业众多"
+        },
+        {
+          "name": "杭州",
+          "note": "拥有阿里巴巴等大型互联网企业，数字经济发展迅速"
+        }
+      ],
+      "companies": [
+        {
+          "name": "腾讯"
+        },
+        {
+          "name": "华为"
+        },
+        {
+          "name": "阿里巴巴"
+        }
+      ],
+      "roles": [
+        {
+          "id": "software-engineer",
+          "name": "软件工程师",
+          "currentDemand": "高，尤其在互联网公司",
+          "requirements": [
+            "编程能力",
+            "算法理解",
+            "系统设计"
+          ]
+        },
+        {
+          "id": "data-scientist",
+          "name": "数据科学家",
+          "currentDemand": "增长迅速，特别是在大数据领域",
+          "requirements": [
+            "统计学",
+            "机器学习",
+            "数据挖掘"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "完成基础编程课程学习",
+          "参加学校编程俱乐部",
+          "阅读AI和机器学习相关书籍"
+        ],
+        "year2": [
+          "学习数据结构和算法",
+          "参与学校的科研项目",
+          "选择AI相关的选修课程"
+        ],
+        "year3": [
+          "参与专业相关的实习",
+          "参与算法竞赛",
+          "学习深度学习框架"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "参加行业招聘会",
+          "准备技术面试和简历"
+        ]
+      }
+    },
+    {
+      "id": "artificial-intelligence",
+      "name": "人工智能",
+      "recommendationBand": "推荐",
+      "matchScore": 90,
+      "aiRisk": "低",
+      "outlook": "AI技术在未来各领域都将扮演重要角色",
+      "competitiveness": 85,
+      "summary": "学生对AI有研究兴趣，数学和逻辑推理能力突出，适合学习人工智能领域。",
+      "schoolStrategy": "选择在AI领域有特色的院校，注重实践和项目经验的培养。",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "AI产业快速发展，对专业人才需求大"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网及AI领域有优秀企业，适合就业与发展"
+        }
+      ],
+      "companies": [
+        {
+          "name": "百度"
+        },
+        {
+          "name": "字节跳动"
+        }
+      ],
+      "roles": [
+        {
+          "id": "ai-engineer",
+          "name": "AI工程师",
+          "currentDemand": "极高，特别是在智能驾驶和机器人领域",
+          "requirements": [
+            "深度学习",
+            "自然语言处理",
+            "计算机视觉"
+          ]
+        },
+        {
+          "id": "machine-learning-expert",
+          "name": "机器学习专家",
+          "currentDemand": "高，特别是大型互联网公司",
+          "requirements": [
+            "算法优化",
+            "模型训练",
+            "数据挖掘"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础数学和统计学课程",
+          "参加编程马拉松活动",
+          "了解AI领域最新动态"
+        ],
+        "year2": [
+          "学习算法和数据结构",
+          "参与学校或在线的AI项目",
+          "参加相关竞赛"
+        ],
+        "year3": [
+          "深入学习机器学习和深度学习",
+          "实习于AI相关企业",
+          "准备学术论文或项目"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "参加行业交流会",
+          "准备技术面试"
+        ]
+      }
+    },
+    {
+      "id": "software-engineering",
+      "name": "软件工程",
+      "recommendationBand": "推荐",
+      "matchScore": 88,
+      "aiRisk": "低",
+      "outlook": "软件工程在数字化转型中扮演核心角色",
+      "competitiveness": 75,
+      "summary": "学生对编程有浓厚兴趣，并具备良好的自学能力，适合学习软件工程。",
+      "schoolStrategy": "选择实践项目丰富的学校，注重与企业的合作。",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "深圳是软件产业的重要基地"
+        },
+        {
+          "name": "杭州",
+          "note": "电子商务和互联网金融发展迅速"
+        }
+      ],
+      "companies": [
+        {
+          "name": "网易"
+        },
+        {
+          "name": "京东"
+        }
+      ],
+      "roles": [
+        {
+          "id": "frontend-developer",
+          "name": "前端开发工程师",
+          "currentDemand": "高，尤其是对于用户体验要求高的互联网公司",
+          "requirements": [
+            "HTML/CSS/JavaScript",
+            "框架使用",
+            "交互设计"
+          ]
+        },
+        {
+          "id": "backend-developer",
+          "name": "后端开发工程师",
+          "currentDemand": "持续增长，尤其在云服务和大数据领域",
+          "requirements": [
+            "服务器端编程",
+            "数据库管理",
+            "系统架构设计"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "完成基础编程和算法课程",
+          "参与开源项目",
+          "学习版本控制系统"
+        ],
+        "year2": [
+          "学习软件工程基础",
+          "参与团队项目开发",
+          "了解软件测试和质量保证"
+        ],
+        "year3": [
+          "深入学习系统架构",
+          "实习于软件开发企业",
+          "参加软件工程相关的竞赛"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "参加行业招聘会",
+          "准备技术面试和简历"
+        ]
+      }
+    },
+    {
+      "id": "information-security",
+      "name": "信息安全",
+      "recommendationBand": "可选",
+      "matchScore": 70,
+      "aiRisk": "低",
+      "outlook": "随着网络安全威胁增加，信息安全领域人才需求增长",
+      "competitiveness": 60,
+      "summary": "学生对解决工程问题感兴趣，信息安全领域需要技术深度和创新思维。",
+      "schoolStrategy": "选择课程设置全面、实验设施先进的学校。",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，对信息安全人才需求大"
+        }
+      ],
+      "companies": [
+        {
+          "name": "深信服"
+        }
+      ],
+      "roles": [
+        {
+          "id": "security-engineer",
+          "name": "安全工程师",
+          "currentDemand": "高，尤其是在金融和互联网行业",
+          "requirements": [
+            "网络协议",
+            "加密技术",
+            "安全审计"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础编程和网络安全课程",
+          "参与学校的安全实验室",
+          "了解最新的安全漏洞和攻击手段"
+        ],
+        "year2": [
+          "学习操作系统和网络基础",
+          "参加CTF（Capture The Flag）竞赛",
+          "学习密码学基础"
+        ],
+        "year3": [
+          "深入学习应用安全和系统安全",
+          "实习于信息安全公司",
+          "参与实际的安全项目"
+        ],
+        "year4": [
+          "完成毕业设计，涉及实际的安全问题",
+          "参加行业交流会",
+          "准备专业认证考试"
+        ]
+      }
+    }
+  ]
+}

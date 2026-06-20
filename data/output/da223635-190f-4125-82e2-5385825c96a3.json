@@ -1,0 +1,559 @@
+{
+  "report_id": "da223635-190f-4125-82e2-5385825c96a3",
+  "generated_at": "2026-06-19T14:11:04.547906+00:00",
+  "profileSummary": {
+    "cluster": "技术探索型",
+    "province": "深圳",
+    "score": 610,
+    "subjectTrack": "AI",
+    "preferredCities": "深圳"
+  },
+  "top": [
+    {
+      "id": "computer-science-and-technology",
+      "name": "计算机科学与技术",
+      "recommendationBand": "强推荐",
+      "matchScore": 95,
+      "aiRisk": "低",
+      "outlook": "AI技术持续发展，对人才需求不断增长",
+      "competitiveness": 85,
+      "summary": "该专业与学生的兴趣AI高度相关，且在深圳就业前景广阔",
+      "schoolStrategy": "优先选择深圳本地知名高校，如深圳大学，或者中山大学深圳校区等，以便于实习和就业",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，AI领域就业机会多"
+        },
+        {
+          "name": "北京",
+          "note": "AI研究和创业氛围浓厚"
+        }
+      ],
+      "companies": [
+        {
+          "name": "华为"
+        },
+        {
+          "name": "腾讯"
+        },
+        {
+          "name": "字节跳动"
+        }
+      ],
+      "roles": [
+        {
+          "id": "ai-engineer",
+          "name": "AI工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "熟练掌握机器学习算法",
+            "熟悉深度学习框架"
+          ]
+        },
+        {
+          "id": "data-scientist",
+          "name": "数据科学家",
+          "currentDemand": "高",
+          "requirements": [
+            "数据分析能力",
+            "统计学背景"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础编程语言和算法",
+          "参加校内编程竞赛"
+        ],
+        "year2": [
+          "选修人工智能相关课程",
+          "加入实验室或研究小组"
+        ],
+        "year3": [
+          "参与AI项目",
+          "寻找实习机会"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "software-engineering",
+      "name": "软件工程",
+      "recommendationBand": "推荐",
+      "matchScore": 90,
+      "aiRisk": "低",
+      "outlook": "软件行业持续发展，对高质量软件工程师的需求稳定",
+      "competitiveness": 80,
+      "summary": "与AI领域有交叉，且学生分数适合该专业",
+      "schoolStrategy": "选择软件工程专业排名靠前的高校，注重实践能力的培养",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "IT产业发达，软件工程师需求大"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网产业兴起，软件工程师机会多"
+        }
+      ],
+      "companies": [
+        {
+          "name": "阿里云"
+        },
+        {
+          "name": "百度"
+        }
+      ],
+      "roles": [
+        {
+          "id": "backend-developer",
+          "name": "后端开发工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "掌握数据库操作",
+            "熟悉网络协议"
+          ]
+        },
+        {
+          "id": "frontend-developer",
+          "name": "前端开发工程师",
+          "currentDemand": "中",
+          "requirements": [
+            "熟悉HTML/CSS/JavaScript",
+            "用户界面设计"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "掌握基本编程技能",
+          "参加软件开发相关的实践课程"
+        ],
+        "year2": [
+          "深入学习数据结构和算法",
+          "参与学校软件项目"
+        ],
+        "year3": [
+          "参与开源项目",
+          "积累实际开发经验"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "information-security",
+      "name": "信息安全",
+      "recommendationBand": "推荐",
+      "matchScore": 85,
+      "aiRisk": "低",
+      "outlook": "随着网络攻击增多，信息安全领域人才需求增加",
+      "competitiveness": 75,
+      "summary": "与AI领域有一定的交集，且学生分数适合该专业",
+      "schoolStrategy": "选择信息安全专业较强的院校，注重攻防实践技能的培养",
+      "cities": [
+        {
+          "name": "北京",
+          "note": "网络安全公司多，就业机会丰富"
+        },
+        {
+          "name": "上海",
+          "note": "金融中心，对信息安全要求高"
+        }
+      ],
+      "companies": [
+        {
+          "name": "360安全公司"
+        },
+        {
+          "name": "奇安信"
+        }
+      ],
+      "roles": [
+        {
+          "id": "security-analyst",
+          "name": "安全分析师",
+          "currentDemand": "高",
+          "requirements": [
+            "熟悉常见网络攻击",
+            "掌握安全防护技术"
+          ]
+        },
+        {
+          "id": "penetration-tester",
+          "name": "渗透测试工程师",
+          "currentDemand": "中",
+          "requirements": [
+            "掌握系统安全漏洞分析",
+            "渗透测试工具使用"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础编程和网络安全原理",
+          "参加CTF等网络安全竞赛"
+        ],
+        "year2": [
+          "深入学习系统安全和应用安全",
+          "加入信息安全实验室"
+        ],
+        "year3": [
+          "参加实习，了解企业安全需求",
+          "参与安全项目实践"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研"
+        ]
+      }
+    }
+  ],
+  "cautious": [
+    {
+      "id": "big-data",
+      "name": "大数据",
+      "recommendationBand": "可选",
+      "matchScore": 75,
+      "aiRisk": "中",
+      "outlook": "大数据行业正在快速发展，对专业人才需求大",
+      "competitiveness": 90,
+      "summary": "与学生兴趣AI相关，但竞争激烈，需要谨慎考虑",
+      "schoolStrategy": "选择大数据领域有特色的院校，注重理论学习和实践相结合",
+      "cities": [
+        {
+          "name": "杭州",
+          "note": "电商大数据产业发展迅速"
+        },
+        {
+          "name": "成都",
+          "note": "大数据企业集聚，人才需求旺盛"
+        }
+      ],
+      "companies": [
+        {
+          "name": "海康威视"
+        },
+        {
+          "name": "京东"
+        }
+      ],
+      "roles": [
+        {
+          "id": "data-engineer",
+          "name": "数据工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "熟悉大数据平台和工具",
+            "数据仓库设计能力"
+          ]
+        },
+        {
+          "id": "data-analyst",
+          "name": "数据分析师",
+          "currentDemand": "中",
+          "requirements": [
+            "数据分析和可视化技能",
+            "统计学知识"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础的数据处理和分析技能",
+          "参加数据挖掘比赛"
+        ],
+        "year2": [
+          "深入学习数据仓库和数据挖掘技术",
+          "参与大数据项目实践"
+        ],
+        "year3": [
+          "寻找大数据实习机会",
+          "提升数据处理和分析能力"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研"
+        ]
+      }
+    }
+  ],
+  "all": [
+    {
+      "id": "computer-science-and-technology",
+      "name": "计算机科学与技术",
+      "recommendationBand": "强推荐",
+      "matchScore": 95,
+      "aiRisk": "低",
+      "outlook": "AI技术持续发展，对人才需求不断增长",
+      "competitiveness": 85,
+      "summary": "该专业与学生的兴趣AI高度相关，且在深圳就业前景广阔",
+      "schoolStrategy": "优先选择深圳本地知名高校，如深圳大学，或者中山大学深圳校区等，以便于实习和就业",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，AI领域就业机会多"
+        },
+        {
+          "name": "北京",
+          "note": "AI研究和创业氛围浓厚"
+        }
+      ],
+      "companies": [
+        {
+          "name": "华为"
+        },
+        {
+          "name": "腾讯"
+        },
+        {
+          "name": "字节跳动"
+        }
+      ],
+      "roles": [
+        {
+          "id": "ai-engineer",
+          "name": "AI工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "熟练掌握机器学习算法",
+            "熟悉深度学习框架"
+          ]
+        },
+        {
+          "id": "data-scientist",
+          "name": "数据科学家",
+          "currentDemand": "高",
+          "requirements": [
+            "数据分析能力",
+            "统计学背景"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础编程语言和算法",
+          "参加校内编程竞赛"
+        ],
+        "year2": [
+          "选修人工智能相关课程",
+          "加入实验室或研究小组"
+        ],
+        "year3": [
+          "参与AI项目",
+          "寻找实习机会"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "software-engineering",
+      "name": "软件工程",
+      "recommendationBand": "推荐",
+      "matchScore": 90,
+      "aiRisk": "低",
+      "outlook": "软件行业持续发展，对高质量软件工程师的需求稳定",
+      "competitiveness": 80,
+      "summary": "与AI领域有交叉，且学生分数适合该专业",
+      "schoolStrategy": "选择软件工程专业排名靠前的高校，注重实践能力的培养",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "IT产业发达，软件工程师需求大"
+        },
+        {
+          "name": "杭州",
+          "note": "互联网产业兴起，软件工程师机会多"
+        }
+      ],
+      "companies": [
+        {
+          "name": "阿里云"
+        },
+        {
+          "name": "百度"
+        }
+      ],
+      "roles": [
+        {
+          "id": "backend-developer",
+          "name": "后端开发工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "掌握数据库操作",
+            "熟悉网络协议"
+          ]
+        },
+        {
+          "id": "frontend-developer",
+          "name": "前端开发工程师",
+          "currentDemand": "中",
+          "requirements": [
+            "熟悉HTML/CSS/JavaScript",
+            "用户界面设计"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "掌握基本编程技能",
+          "参加软件开发相关的实践课程"
+        ],
+        "year2": [
+          "深入学习数据结构和算法",
+          "参与学校软件项目"
+        ],
+        "year3": [
+          "参与开源项目",
+          "积累实际开发经验"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "information-security",
+      "name": "信息安全",
+      "recommendationBand": "推荐",
+      "matchScore": 85,
+      "aiRisk": "低",
+      "outlook": "随着网络攻击增多，信息安全领域人才需求增加",
+      "competitiveness": 75,
+      "summary": "与AI领域有一定的交集，且学生分数适合该专业",
+      "schoolStrategy": "选择信息安全专业较强的院校，注重攻防实践技能的培养",
+      "cities": [
+        {
+          "name": "北京",
+          "note": "网络安全公司多，就业机会丰富"
+        },
+        {
+          "name": "上海",
+          "note": "金融中心，对信息安全要求高"
+        }
+      ],
+      "companies": [
+        {
+          "name": "360安全公司"
+        },
+        {
+          "name": "奇安信"
+        }
+      ],
+      "roles": [
+        {
+          "id": "security-analyst",
+          "name": "安全分析师",
+          "currentDemand": "高",
+          "requirements": [
+            "熟悉常见网络攻击",
+            "掌握安全防护技术"
+          ]
+        },
+        {
+          "id": "penetration-tester",
+          "name": "渗透测试工程师",
+          "currentDemand": "中",
+          "requirements": [
+            "掌握系统安全漏洞分析",
+            "渗透测试工具使用"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础编程和网络安全原理",
+          "参加CTF等网络安全竞赛"
+        ],
+        "year2": [
+          "深入学习系统安全和应用安全",
+          "加入信息安全实验室"
+        ],
+        "year3": [
+          "参加实习，了解企业安全需求",
+          "参与安全项目实践"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "big-data",
+      "name": "大数据",
+      "recommendationBand": "可选",
+      "matchScore": 75,
+      "aiRisk": "中",
+      "outlook": "大数据行业正在快速发展，对专业人才需求大",
+      "competitiveness": 90,
+      "summary": "与学生兴趣AI相关，但竞争激烈，需要谨慎考虑",
+      "schoolStrategy": "选择大数据领域有特色的院校，注重理论学习和实践相结合",
+      "cities": [
+        {
+          "name": "杭州",
+          "note": "电商大数据产业发展迅速"
+        },
+        {
+          "name": "成都",
+          "note": "大数据企业集聚，人才需求旺盛"
+        }
+      ],
+      "companies": [
+        {
+          "name": "海康威视"
+        },
+        {
+          "name": "京东"
+        }
+      ],
+      "roles": [
+        {
+          "id": "data-engineer",
+          "name": "数据工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "熟悉大数据平台和工具",
+            "数据仓库设计能力"
+          ]
+        },
+        {
+          "id": "data-analyst",
+          "name": "数据分析师",
+          "currentDemand": "中",
+          "requirements": [
+            "数据分析和可视化技能",
+            "统计学知识"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础的数据处理和分析技能",
+          "参加数据挖掘比赛"
+        ],
+        "year2": [
+          "深入学习数据仓库和数据挖掘技术",
+          "参与大数据项目实践"
+        ],
+        "year3": [
+          "寻找大数据实习机会",
+          "提升数据处理和分析能力"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "准备就业或考研"
+        ]
+      }
+    }
+  ]
+}

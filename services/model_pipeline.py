@@ -71,7 +71,7 @@ async def generate_report(data_path: Path, prompt_template_path: Path) -> dict:
             {"role": "user", "content": prompt},
         ],
         temperature=0.7,
-        max_tokens=8000,
+        max_tokens=2000,
     )
 
     content = response.choices[0].message.content

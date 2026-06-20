@@ -1,0 +1,373 @@
+{
+  "report_id": "51754e99-f1f2-4bf9-8706-6abb620c4853",
+  "generated_at": "2026-06-20T01:35:56.414027+00:00",
+  "profileSummary": {
+    "cluster": "理科高分段、对科技行业有浓厚兴趣的学生",
+    "province": "广东",
+    "score": 610,
+    "subjectTrack": "理科",
+    "preferredCities": [
+      "深圳"
+    ]
+  },
+  "top": [
+    {
+      "id": "CS001",
+      "name": "计算机科学与技术",
+      "recommendationBand": "强推荐",
+      "matchScore": 95,
+      "aiRisk": "低",
+      "outlook": "就业前景广阔，科技行业核心专业",
+      "competitiveness": 90,
+      "summary": "理科背景加上对写代码和研究AI的兴趣，计算机科学与技术专业非常匹配",
+      "schoolStrategy": "优先选择广东省内排名靠前的高校，深圳是科技产业聚集地，专业匹配度高",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，IT公司众多，如腾讯、华为等"
+        }
+      ],
+      "companies": [
+        {
+          "name": "腾讯"
+        },
+        {
+          "name": "华为"
+        }
+      ],
+      "roles": [
+        {
+          "id": "DEV01",
+          "name": "软件工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "编程语言",
+            "算法"
+          ]
+        },
+        {
+          "id": "AI01",
+          "name": "人工智能工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "机器学习",
+            "深度学习"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "打好编程基础，学习数据结构和算法"
+        ],
+        "year2": [
+          "参与实验室项目，学习数据库和操作系统"
+        ],
+        "year3": [
+          "选择感兴趣的方向进行深入学习，如人工智能、网络安全"
+        ],
+        "year4": [
+          "实习经历，准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "EE001",
+      "name": "电子信息工程",
+      "recommendationBand": "推荐",
+      "matchScore": 88,
+      "aiRisk": "中",
+      "outlook": "5G、物联网等行业需求增长",
+      "competitiveness": 85,
+      "summary": "优秀的数学能力为电子信息工程打下良好基础，与深圳的产业需求相匹配",
+      "schoolStrategy": "选择与产业界合作紧密的院校，便于实习和就业",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "电子信息产业基地，有众多高科技企业"
+        }
+      ],
+      "companies": [
+        {
+          "name": "中兴通讯"
+        },
+        {
+          "name": "大疆创新"
+        }
+      ],
+      "roles": [
+        {
+          "id": "EE01",
+          "name": "硬件工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "电路设计",
+            "微处理器原理"
+          ]
+        },
+        {
+          "id": "EE02",
+          "name": "嵌入式系统工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "C/C++",
+            "嵌入式操作系统"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习电路分析和数字逻辑设计"
+        ],
+        "year2": [
+          "参与电子设计竞赛，提升实践能力"
+        ],
+        "year3": [
+          "深入学习通信原理和信号处理"
+        ],
+        "year4": [
+          "实习，积累项目经验，准备就业"
+        ]
+      }
+    }
+  ],
+  "cautious": [
+    {
+      "id": "MATH001",
+      "name": "数学与应用数学",
+      "recommendationBand": "谨慎推荐",
+      "matchScore": 80,
+      "aiRisk": "高",
+      "outlook": "基础学科，转行空间大",
+      "competitiveness": 75,
+      "summary": "数学能力出众，适合进一步深造或转向数据分析、金融等方向",
+      "schoolStrategy": "选择数学专业排名较高的院校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "金融中心，对数学专业人才有较大需求"
+        }
+      ],
+      "companies": [
+        {
+          "name": "平安科技"
+        },
+        {
+          "name": "招商证券"
+        }
+      ],
+      "roles": [
+        {
+          "id": "MATH01",
+          "name": "数据分析师",
+          "currentDemand": "高",
+          "requirements": [
+            "统计学",
+            "数据库"
+          ]
+        },
+        {
+          "id": "MATH02",
+          "name": "量化分析师",
+          "currentDemand": "中",
+          "requirements": [
+            "金融数学",
+            "编程"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习高等数学和线性代数"
+        ],
+        "year2": [
+          "参加数学建模竞赛，提升解决问题的能力"
+        ],
+        "year3": [
+          "选择应用方向，如金融数学，进行深入学习"
+        ],
+        "year4": [
+          "实习，积累行业经验"
+        ]
+      }
+    }
+  ],
+  "all": [
+    {
+      "id": "CS001",
+      "name": "计算机科学与技术",
+      "recommendationBand": "强推荐",
+      "matchScore": 95,
+      "aiRisk": "低",
+      "outlook": "就业前景广阔，科技行业核心专业",
+      "competitiveness": 90,
+      "summary": "理科背景加上对写代码和研究AI的兴趣，计算机科学与技术专业非常匹配",
+      "schoolStrategy": "优先选择广东省内排名靠前的高校，深圳是科技产业聚集地，专业匹配度高",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，IT公司众多，如腾讯、华为等"
+        }
+      ],
+      "companies": [
+        {
+          "name": "腾讯"
+        },
+        {
+          "name": "华为"
+        }
+      ],
+      "roles": [
+        {
+          "id": "DEV01",
+          "name": "软件工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "编程语言",
+            "算法"
+          ]
+        },
+        {
+          "id": "AI01",
+          "name": "人工智能工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "机器学习",
+            "深度学习"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "打好编程基础，学习数据结构和算法"
+        ],
+        "year2": [
+          "参与实验室项目，学习数据库和操作系统"
+        ],
+        "year3": [
+          "选择感兴趣的方向进行深入学习，如人工智能、网络安全"
+        ],
+        "year4": [
+          "实习经历，准备就业或考研"
+        ]
+      }
+    },
+    {
+      "id": "EE001",
+      "name": "电子信息工程",
+      "recommendationBand": "推荐",
+      "matchScore": 88,
+      "aiRisk": "中",
+      "outlook": "5G、物联网等行业需求增长",
+      "competitiveness": 85,
+      "summary": "优秀的数学能力为电子信息工程打下良好基础，与深圳的产业需求相匹配",
+      "schoolStrategy": "选择与产业界合作紧密的院校，便于实习和就业",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "电子信息产业基地，有众多高科技企业"
+        }
+      ],
+      "companies": [
+        {
+          "name": "中兴通讯"
+        },
+        {
+          "name": "大疆创新"
+        }
+      ],
+      "roles": [
+        {
+          "id": "EE01",
+          "name": "硬件工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "电路设计",
+            "微处理器原理"
+          ]
+        },
+        {
+          "id": "EE02",
+          "name": "嵌入式系统工程师",
+          "currentDemand": "高",
+          "requirements": [
+            "C/C++",
+            "嵌入式操作系统"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习电路分析和数字逻辑设计"
+        ],
+        "year2": [
+          "参与电子设计竞赛，提升实践能力"
+        ],
+        "year3": [
+          "深入学习通信原理和信号处理"
+        ],
+        "year4": [
+          "实习，积累项目经验，准备就业"
+        ]
+      }
+    },
+    {
+      "id": "MATH001",
+      "name": "数学与应用数学",
+      "recommendationBand": "谨慎推荐",
+      "matchScore": 80,
+      "aiRisk": "高",
+      "outlook": "基础学科，转行空间大",
+      "competitiveness": 75,
+      "summary": "数学能力出众，适合进一步深造或转向数据分析、金融等方向",
+      "schoolStrategy": "选择数学专业排名较高的院校",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "金融中心，对数学专业人才有较大需求"
+        }
+      ],
+      "companies": [
+        {
+          "name": "平安科技"
+        },
+        {
+          "name": "招商证券"
+        }
+      ],
+      "roles": [
+        {
+          "id": "MATH01",
+          "name": "数据分析师",
+          "currentDemand": "高",
+          "requirements": [
+            "统计学",
+            "数据库"
+          ]
+        },
+        {
+          "id": "MATH02",
+          "name": "量化分析师",
+          "currentDemand": "中",
+          "requirements": [
+            "金融数学",
+            "编程"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习高等数学和线性代数"
+        ],
+        "year2": [
+          "参加数学建模竞赛，提升解决问题的能力"
+        ],
+        "year3": [
+          "选择应用方向，如金融数学，进行深入学习"
+        ],
+        "year4": [
+          "实习，积累行业经验"
+        ]
+      }
+    }
+  ]
+}

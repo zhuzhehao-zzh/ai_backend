@@ -1,0 +1,473 @@
+{
+  "report_id": "2a9eae54-cf8a-479e-9b5f-4e7d1069604c",
+  "generated_at": "2026-06-19T14:18:30.747482+00:00",
+  "profileSummary": {
+    "cluster": "技术探索型",
+    "province": "广东",
+    "score": 300,
+    "subjectTrack": "历史类",
+    "preferredCities": "广州"
+  },
+  "top": [
+    {
+      "id": "geology-surveying",
+      "name": "地质学",
+      "recommendationBand": "强推荐",
+      "matchScore": 90,
+      "aiRisk": "低",
+      "outlook": "地质行业在新能源、环保领域需求稳定增长",
+      "competitiveness": 60,
+      "summary": "学生对地质勘测有浓厚兴趣，技能与专业需求匹配度高",
+      "schoolStrategy": "优先选择地质学优势明显的大学，关注实验设备与实习机会",
+      "cities": [
+        {
+          "name": "广州",
+          "note": "地质勘探公司及研究机构较多"
+        },
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，新能源领域需求"
+        }
+      ],
+      "companies": [
+        {
+          "name": "中国地质大学"
+        }
+      ],
+      "roles": [
+        {
+          "id": "geologist",
+          "name": "地质工程师",
+          "currentDemand": "随着新能源行业发展，需求增加",
+          "requirements": [
+            "地质勘探",
+            "数据分析",
+            "环境评估"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础地质学原理",
+          "参加地质学入门讲座",
+          "加入地质学学生社团"
+        ],
+        "year2": [
+          "参与地质实习",
+          "学习GIS和地质建模软件",
+          "参加地质学竞赛"
+        ],
+        "year3": [
+          "深入学习地质勘探技术",
+          "参与跨学科项目",
+          "准备地质学相关证书考试"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "寻找地质行业的实习机会",
+          "准备地质工程师职业资格考试"
+        ]
+      }
+    },
+    {
+      "id": "geographic-information-science",
+      "name": "地理信息科学",
+      "recommendationBand": "推荐",
+      "matchScore": 85,
+      "aiRisk": "中",
+      "outlook": "地理信息技术在智慧城市和环境监测中应用广泛",
+      "competitiveness": 70,
+      "summary": "结合学生地理学科背景和对技术壁垒的兴趣",
+      "schoolStrategy": "寻找GIS领域研究实力较强的院校",
+      "cities": [
+        {
+          "name": "广州",
+          "note": "地理信息技术企业聚集，需求旺盛"
+        }
+      ],
+      "companies": [
+        {
+          "name": "广州地理信息中心"
+        }
+      ],
+      "roles": [
+        {
+          "id": "gis-analyst",
+          "name": "GIS分析师",
+          "currentDemand": "城市信息化建设增加对GIS分析师的需求",
+          "requirements": [
+            "地理信息系统",
+            "数据分析",
+            "编程"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习GIS基础课程",
+          "了解GIS软件操作",
+          "参加GIS相关竞赛"
+        ],
+        "year2": [
+          "学习遥感技术",
+          "参与GIS项目实践",
+          "学习空间数据库管理"
+        ],
+        "year3": [
+          "深入学习高级GIS应用",
+          "参与智慧城市项目",
+          "准备GIS相关证书考试"
+        ],
+        "year4": [
+          "完成GIS相关的毕业设计",
+          "寻找GIS行业的实习机会",
+          "准备GIS分析师职业发展"
+        ]
+      }
+    },
+    {
+      "id": "environmental-science",
+      "name": "环境科学",
+      "recommendationBand": "推荐",
+      "matchScore": 80,
+      "aiRisk": "低",
+      "outlook": "环保政策推动环境科学行业快速发展",
+      "competitiveness": 65,
+      "summary": "学生对地质勘测的兴趣与环境科学专业紧密相关",
+      "schoolStrategy": "选择环境科学专业历史悠久的院校",
+      "cities": [
+        {
+          "name": "广州",
+          "note": "环保法规严格，环境科学专业需求大"
+        }
+      ],
+      "companies": [
+        {
+          "name": "广东省环境科学研究院"
+        }
+      ],
+      "roles": [
+        {
+          "id": "environmental-consultant",
+          "name": "环境顾问",
+          "currentDemand": "环保法规推动对环境顾问的需求增加",
+          "requirements": [
+            "环境评估",
+            "政策分析",
+            "污染控制"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习环境科学基础课程",
+          "参观环境监测站",
+          "加入环境科学学生组织"
+        ],
+        "year2": [
+          "参与环境科学实验",
+          "学习环境影响评估",
+          "参加环境科学竞赛"
+        ],
+        "year3": [
+          "深入学习环境政策与法规",
+          "参与环境项目实践",
+          "准备环境科学相关证书考试"
+        ],
+        "year4": [
+          "完成环境科学相关的毕业设计",
+          "寻找环境顾问的实习机会",
+          "准备环境科学领域职业发展"
+        ]
+      }
+    }
+  ],
+  "cautious": [
+    {
+      "id": "information-management",
+      "name": "信息管理与信息系统",
+      "recommendationBand": "可选",
+      "matchScore": 70,
+      "aiRisk": "高",
+      "outlook": "信息管理专业在数字化转型中扮演重要角色",
+      "competitiveness": 80,
+      "summary": "学生自学能力和逻辑推理能力适合信息管理专业，但需注意AI替代风险",
+      "schoolStrategy": "选择信息系统专业实力强的大学，关注实践教学",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "信息技术产业发达，就业机会多"
+        }
+      ],
+      "companies": [
+        {
+          "name": "腾讯"
+        }
+      ],
+      "roles": [
+        {
+          "id": "it-consultant",
+          "name": "IT顾问",
+          "currentDemand": "数字化转型推动IT顾问需求增加",
+          "requirements": [
+            "信息系统管理",
+            "数据分析",
+            "项目管理"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习信息系统基础课程",
+          "了解IT行业动态",
+          "加入IT学生俱乐部"
+        ],
+        "year2": [
+          "学习数据库管理",
+          "参与信息系统项目实践",
+          "学习编程语言"
+        ],
+        "year3": [
+          "深入学习信息化管理",
+          "参与数字化转型项目",
+          "准备信息系统项目管理师考试"
+        ],
+        "year4": [
+          "完成信息系统相关的毕业设计",
+          "寻找IT顾问的实习机会",
+          "准备IT顾问职业发展"
+        ]
+      }
+    }
+  ],
+  "all": [
+    {
+      "id": "geology-surveying",
+      "name": "地质学",
+      "recommendationBand": "强推荐",
+      "matchScore": 90,
+      "aiRisk": "低",
+      "outlook": "地质行业在新能源、环保领域需求稳定增长",
+      "competitiveness": 60,
+      "summary": "学生对地质勘测有浓厚兴趣，技能与专业需求匹配度高",
+      "schoolStrategy": "优先选择地质学优势明显的大学，关注实验设备与实习机会",
+      "cities": [
+        {
+          "name": "广州",
+          "note": "地质勘探公司及研究机构较多"
+        },
+        {
+          "name": "深圳",
+          "note": "高新技术产业发达，新能源领域需求"
+        }
+      ],
+      "companies": [
+        {
+          "name": "中国地质大学"
+        }
+      ],
+      "roles": [
+        {
+          "id": "geologist",
+          "name": "地质工程师",
+          "currentDemand": "随着新能源行业发展，需求增加",
+          "requirements": [
+            "地质勘探",
+            "数据分析",
+            "环境评估"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习基础地质学原理",
+          "参加地质学入门讲座",
+          "加入地质学学生社团"
+        ],
+        "year2": [
+          "参与地质实习",
+          "学习GIS和地质建模软件",
+          "参加地质学竞赛"
+        ],
+        "year3": [
+          "深入学习地质勘探技术",
+          "参与跨学科项目",
+          "准备地质学相关证书考试"
+        ],
+        "year4": [
+          "完成毕业设计",
+          "寻找地质行业的实习机会",
+          "准备地质工程师职业资格考试"
+        ]
+      }
+    },
+    {
+      "id": "geographic-information-science",
+      "name": "地理信息科学",
+      "recommendationBand": "推荐",
+      "matchScore": 85,
+      "aiRisk": "中",
+      "outlook": "地理信息技术在智慧城市和环境监测中应用广泛",
+      "competitiveness": 70,
+      "summary": "结合学生地理学科背景和对技术壁垒的兴趣",
+      "schoolStrategy": "寻找GIS领域研究实力较强的院校",
+      "cities": [
+        {
+          "name": "广州",
+          "note": "地理信息技术企业聚集，需求旺盛"
+        }
+      ],
+      "companies": [
+        {
+          "name": "广州地理信息中心"
+        }
+      ],
+      "roles": [
+        {
+          "id": "gis-analyst",
+          "name": "GIS分析师",
+          "currentDemand": "城市信息化建设增加对GIS分析师的需求",
+          "requirements": [
+            "地理信息系统",
+            "数据分析",
+            "编程"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习GIS基础课程",
+          "了解GIS软件操作",
+          "参加GIS相关竞赛"
+        ],
+        "year2": [
+          "学习遥感技术",
+          "参与GIS项目实践",
+          "学习空间数据库管理"
+        ],
+        "year3": [
+          "深入学习高级GIS应用",
+          "参与智慧城市项目",
+          "准备GIS相关证书考试"
+        ],
+        "year4": [
+          "完成GIS相关的毕业设计",
+          "寻找GIS行业的实习机会",
+          "准备GIS分析师职业发展"
+        ]
+      }
+    },
+    {
+      "id": "environmental-science",
+      "name": "环境科学",
+      "recommendationBand": "推荐",
+      "matchScore": 80,
+      "aiRisk": "低",
+      "outlook": "环保政策推动环境科学行业快速发展",
+      "competitiveness": 65,
+      "summary": "学生对地质勘测的兴趣与环境科学专业紧密相关",
+      "schoolStrategy": "选择环境科学专业历史悠久的院校",
+      "cities": [
+        {
+          "name": "广州",
+          "note": "环保法规严格，环境科学专业需求大"
+        }
+      ],
+      "companies": [
+        {
+          "name": "广东省环境科学研究院"
+        }
+      ],
+      "roles": [
+        {
+          "id": "environmental-consultant",
+          "name": "环境顾问",
+          "currentDemand": "环保法规推动对环境顾问的需求增加",
+          "requirements": [
+            "环境评估",
+            "政策分析",
+            "污染控制"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习环境科学基础课程",
+          "参观环境监测站",
+          "加入环境科学学生组织"
+        ],
+        "year2": [
+          "参与环境科学实验",
+          "学习环境影响评估",
+          "参加环境科学竞赛"
+        ],
+        "year3": [
+          "深入学习环境政策与法规",
+          "参与环境项目实践",
+          "准备环境科学相关证书考试"
+        ],
+        "year4": [
+          "完成环境科学相关的毕业设计",
+          "寻找环境顾问的实习机会",
+          "准备环境科学领域职业发展"
+        ]
+      }
+    },
+    {
+      "id": "information-management",
+      "name": "信息管理与信息系统",
+      "recommendationBand": "可选",
+      "matchScore": 70,
+      "aiRisk": "高",
+      "outlook": "信息管理专业在数字化转型中扮演重要角色",
+      "competitiveness": 80,
+      "summary": "学生自学能力和逻辑推理能力适合信息管理专业，但需注意AI替代风险",
+      "schoolStrategy": "选择信息系统专业实力强的大学，关注实践教学",
+      "cities": [
+        {
+          "name": "深圳",
+          "note": "信息技术产业发达，就业机会多"
+        }
+      ],
+      "companies": [
+        {
+          "name": "腾讯"
+        }
+      ],
+      "roles": [
+        {
+          "id": "it-consultant",
+          "name": "IT顾问",
+          "currentDemand": "数字化转型推动IT顾问需求增加",
+          "requirements": [
+            "信息系统管理",
+            "数据分析",
+            "项目管理"
+          ]
+        }
+      ],
+      "yearPlan": {
+        "year1": [
+          "学习信息系统基础课程",
+          "了解IT行业动态",
+          "加入IT学生俱乐部"
+        ],
+        "year2": [
+          "学习数据库管理",
+          "参与信息系统项目实践",
+          "学习编程语言"
+        ],
+        "year3": [
+          "深入学习信息化管理",
+          "参与数字化转型项目",
+          "准备信息系统项目管理师考试"
+        ],
+        "year4": [
+          "完成信息系统相关的毕业设计",
+          "寻找IT顾问的实习机会",
+          "准备IT顾问职业发展"
+        ]
+      }
+    }
+  ]
+}
