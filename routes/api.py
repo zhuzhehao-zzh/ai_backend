@@ -4,7 +4,7 @@ import uuid
 import logging
 from pathlib import Path
 
-from fastapi import APIRouter, Body, HTTPException
+from fastapi import APIRouter, Body, HTTPException, Request
 
 from models.submission import SubmitResponse
 from services.consolidator import consolidate_and_save
@@ -21,29 +21,29 @@ PROMPT_DIR = Path("prompts")
 
 
 @router.post("/submit", response_model=SubmitResponse)
-async def submit(data: dict = Body(...)):
+async def submit(data: dict = Body(...), request: Request = None):
     """Receive student data → save → enrich with history → call Kimi → save response."""
+    client_ip = request.client.host if request and request.client else "unknown"
     request_id = str(uuid.uuid4())
 
+    logger.info(
+        "REQUEST  | %s | %s | score=%s interests=%s city=%s province=%s",
+        client_ip, request_id,
+        data.get("score"), data.get("interests"), data.get("city"), data.get("province"),
+    )
+
     try:
-        # 1. Save raw student data to disk and DB
         data_path = await consolidate_and_save(data)
         try:
             await save_request(request_id, data)
         except Exception:
             logger.warning("DB save failed (request)", exc_info=True)
 
-        # 2. Get historical patterns for prompt enrichment
         patterns = await get_pattern_summary()
-
-        # 3. Generate report via LLM (with patterns)
         prompt_path = PROMPT_DIR / "admission-guide.md"
         model_response = await generate_report(data_path, prompt_path, patterns)
-
-        # 4. Save report
         report = await save_report(model_response)
 
-        # 5. Save response to DB (async, non-blocking)
         try:
             await save_response(
                 response_id=report["report_id"],
@@ -53,10 +53,16 @@ async def submit(data: dict = Body(...)):
         except Exception:
             logger.warning("DB save failed (response)", exc_info=True)
 
+        top_names = [t.get("name", "?") for t in model_response.get("top", [])]
+        logger.info(
+            "RESPONSE | %s | %s | top=%s report_id=%s",
+            client_ip, request_id, top_names, report["report_id"],
+        )
+
         return report
 
     except Exception as exc:
-        logger.exception("Submission failed")
+        logger.exception("ERROR    | %s | %s | %s", client_ip, request_id, exc)
         raise HTTPException(
             status_code=500,
             detail={"code": "INTERNAL_ERROR", "message": str(exc)},
@@ -64,8 +70,9 @@ async def submit(data: dict = Body(...)):
 
 
 @router.post("/feedback")
-async def feedback(body: dict = Body(...)):
+async def feedback(body: dict = Body(...), request: Request = None):
     """Record user feedback (rating 1-5) for a response."""
+    client_ip = request.client.host if request and request.client else "unknown"
     response_id = body.get("response_id")
     rating = body.get("rating")
     comment = body.get("comment")
@@ -77,7 +84,11 @@ async def feedback(body: dict = Body(...)):
 
     try:
         await save_feedback(response_id, rating, comment)
+        logger.info(
+            "FEEDBACK | %s | response=%s rating=%d comment=%s",
+            client_ip, response_id, rating, comment or "",
+        )
         return {"status": "ok", "message": "Feedback recorded"}
     except Exception as exc:
-        logger.exception("Feedback save failed")
+        logger.exception("FEEDBACK FAIL | %s", client_ip)
         raise HTTPException(status_code=500, detail=str(exc))
