@@ -1,5 +1,6 @@
 """Thin route handler — delegates to services for all business logic."""
 
+import json
 import uuid
 import logging
 from pathlib import Path
@@ -12,6 +13,11 @@ from services.model_pipeline import generate_report
 from services.report_generator import save_report
 from services.database import save_request, save_response, save_feedback
 from services.history_service import get_pattern_summary
+from services.security import (
+    check_rate_limit,
+    validate_json_depth,
+    scan_data_for_injection,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -22,14 +28,29 @@ PROMPT_DIR = Path("prompts")
 
 @router.post("/submit", response_model=SubmitResponse)
 async def submit(data: dict = Body(...), request: Request = None):
-    """Receive student data → save → enrich with history → call Kimi → save response."""
+    """Receive student data → security checks → save → Kimi → save response."""
     client_ip = request.client.host if request and request.client else "unknown"
     request_id = str(uuid.uuid4())
 
+    # ── Security checks ──────────────────────────────────────────
+    if not check_rate_limit(client_ip):
+        raise HTTPException(status_code=429, detail="Too many requests, please wait")
+
+    try:
+        validate_json_depth(data)
+    except ValueError as e:
+        logger.warning("SECURITY | %s | invalid JSON structure: %s", client_ip, e)
+        raise HTTPException(status_code=400, detail=str(e))
+
+    flagged = scan_data_for_injection(data)
+    if flagged:
+        logger.warning("SECURITY | %s | prompt injection flagged in: %s", client_ip, flagged)
+        raise HTTPException(status_code=400, detail="Input contains prohibited patterns")
+
+    # ── Process request ─────────────────────────────────────────
     logger.info(
-        "REQUEST  | %s | %s | score=%s interests=%s city=%s province=%s",
-        client_ip, request_id,
-        data.get("score"), data.get("interests"), data.get("city"), data.get("province"),
+        "REQUEST  | %s | %s | keys=%s",
+        client_ip, request_id, list(data.keys()),
     )
 
     try:
@@ -61,6 +82,8 @@ async def submit(data: dict = Body(...), request: Request = None):
 
         return report
 
+    except HTTPException:
+        raise
     except Exception as exc:
         logger.exception("ERROR    | %s | %s | %s", client_ip, request_id, exc)
         raise HTTPException(
@@ -85,8 +108,8 @@ async def feedback(body: dict = Body(...), request: Request = None):
     try:
         await save_feedback(response_id, rating, comment)
         logger.info(
-            "FEEDBACK | %s | response=%s rating=%d comment=%s",
-            client_ip, response_id, rating, comment or "",
+            "FEEDBACK | %s | response=%s rating=%d",
+            client_ip, response_id, rating,
         )
         return {"status": "ok", "message": "Feedback recorded"}
     except Exception as exc:

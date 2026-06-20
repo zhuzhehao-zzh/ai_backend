@@ -8,6 +8,8 @@ from pathlib import Path
 
 from openai import AsyncOpenAI
 
+from services.security import build_secure_prompt
+
 logger = logging.getLogger(__name__)
 
 client = AsyncOpenAI(
@@ -50,16 +52,11 @@ async def generate_report(
     data = json.loads(data_path.read_text(encoding="utf-8"))
     template = prompt_template_path.read_text(encoding="utf-8")
 
-    # Inject historical patterns if available
-    if patterns:
-        template = template.replace("{historical_patterns}", patterns)
-    else:
-        template = template.replace("{historical_patterns}\n", "")
-
-    # Fill student data
-    prompt = template.replace(
-        "{student_data}",
+    # Build prompt with security boundaries around student data
+    prompt = build_secure_prompt(
+        template,
         json.dumps(data, indent=2, ensure_ascii=False),
+        patterns,
     )
 
     logger.info("Calling model with data from %s", data_path.name)
