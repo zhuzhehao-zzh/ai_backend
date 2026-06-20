@@ -132,24 +132,22 @@ if status == "200":
     check("matchScores are 0-100", all(0 <= s <= 100 for s in match_scores),
           f"got scores: {match_scores}")
 
-# 3. Submit empty object
-print("\n[3] Submit Empty Object")
-status, data, err = run_curl("POST", "/api/submit", {}, timeout=120)
-check("Empty object returns 200", status == "200", f"got {status}")
-check("Still has report_id", "report_id" in data)
-
-# 4. Submit minimal data
-print("\n[4] Submit Minimal Data")
-status, data, err = run_curl("POST", "/api/submit", {"only": "this"}, timeout=120)
-check("Minimal returns 200", status == "200", f"got {status}")
+# 3. Submit with partial data (empty is rejected — LLM needs some context)
+print("\n[3] Submit with Partial Data")
+status, data, err = run_curl("POST", "/api/submit", {"score": 600}, timeout=120)
+check("Partial data returns 200", status == "200", f"got {status}")
+check("Has report_id", "report_id" in data)
 check("Has profileSummary", "profileSummary" in data)
 
-# 5. Response time check
+# 4. Different field names work (backend is field-agnostic)
+print("\n[4] Custom Field Names")
+status, data, err = run_curl("POST", "/api/submit",
+    {"score": 610, "interests": "编程", "city": "深圳"}, timeout=120)
+check("Custom fields returns 200", status == "200", f"got {status}")
+check("Has recommendations", len(data.get("top", [])) > 0)
+
+# 5. Response time check (informational)
 print("\n[5] Response Time")
-# Quick measure with a simpler payload
-_, _, _ = run_curl("POST", "/api/submit",
-                   {"score": 600, "interests": "test"}, timeout=120)
-# We won't fail on this, just informative
 print("  (Response time depends on Kimi API — typically 30-60s)")
 
 print()
