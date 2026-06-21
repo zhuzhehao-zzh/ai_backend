@@ -1,6 +1,6 @@
-# AI Backend — College Application Guidance
+# AI Backend — College Application Guidance (Gaokao)
 
-A Python-based AI backend service that helps students fill out their college application preferences. It receives student information from a frontend, consolidates it, feeds it to a Large Language Model (LLM), and returns a structured report with university recommendations and action items.
+A Python-based AI backend service that helps Chinese students make informed college application decisions based on their Gaokao (高考) scores. It accepts arbitrary student data, queries a local knowledge base (university rankings, admission scores, major details) via LLM function calling, and returns a structured report with personalized recommendations, career outlook, and a 4-year study plan.
 
 ---
 
@@ -10,8 +10,9 @@ A Python-based AI backend service that helps students fill out their college app
 |---|---|
 | **Runtime** | Python 3.11+ |
 | **Framework** | [FastAPI](https://fastapi.tiangolo.com/) + Uvicorn |
-| **Validation** | [Pydantic v2](https://docs.pydantic.dev/latest/) |
-| **LLM Client** | [OpenAI SDK](https://github.com/openai/openai-python) (AsyncOpenAI, pointed at Moonshot AI) |
+| **LLM Client** | [OpenAI SDK](https://github.com/openai/openai-python) (AsyncOpenAI, pointed at Moonshot AI / Kimi) |
+| **Database** | MySQL 8.0 + aiomysql (async pool) |
+| **Validation** | Pydantic v2 (output only) |
 | **File I/O** | aiofiles (async) |
 | **Config** | python-dotenv (`.env`) |
 
@@ -21,96 +22,95 @@ A Python-based AI backend service that helps students fill out their college app
 
 ```
 ai_backend/
-├── main.py                      # FastAPI entry point — app creation, router wiring, logging setup
+├── main.py                      # FastAPI entry point, logging setup, DB pool lifecycle
 ├── requirements.txt             # Python dependencies
-├── pytest.ini                   # Pytest configuration (asyncio_mode = auto)
-├── .gitignore                   # Git ignore rules
-├── .env                         # API keys & secrets (git-ignored, not committed)
+├── pytest.ini                   # Pytest config
+├── DEPLOY.md                    # Cloud deployment & systemd guide
+├── .gitignore
+├── .env                         # API keys & DB credentials (git-ignored)
 │
-├── models/                      # Pydantic schemas — request/response validation
-│   └── submission.py            # StudentInfo, SubmitResponse, ErrorResponse
+├── models/
+│   └── submission.py            # SubmitResponse (output model with profileSummary/top/cautious/all)
 │
-├── routes/                      # API route definitions (thin handlers)
-│   └── api.py                   # POST /api/submit — the single submission endpoint
+├── routes/
+│   └── api.py                   # POST /api/submit + POST /api/feedback
 │
-├── services/                    # Business logic (stateless, receive input → return output)
-│   ├── consolidator.py          # Save validated student data to a JSON file on disk
-│   ├── model_pipeline.py        # Load data + prompt → call LLM → parse JSON report
-│   └── report_generator.py      # Save report to disk & return frontend-safe payload
+├── services/
+│   ├── consolidator.py          # Save raw JSON to data/input/
+│   ├── model_pipeline.py        # 3-phase workflow: Explore → Analyze → Report (with function calling)
+│   ├── report_generator.py      # Save final report to data/output/
+│   ├── database.py              # MySQL connection pool & CRUD (requests, responses, feedback)
+│   ├── history_service.py       # Historical pattern computation from past feedback
+│   ├── security.py              # Rate limiting, injection detection, prompt boundaries
+│   └── knowledge_service.py     # Knowledge base tools (callable by Kimi via function calling)
 │
-├── prompts/                     # LLM prompt templates
-│   └── admission-guide.md       # Template with all student fields + JSON output schema
+├── prompts/
+│   └── admission-guide.md       # LLM prompt template
 │
-├── data/                        # Runtime file storage (created automatically)
-│   ├── input/                   # Consolidated student data JSON files
-│   └── output/                  # Generated report JSON files
+├── data/
+│   ├── input/                   # Raw student data (JSON)
+│   ├── output/                  # Generated reports (JSON)
+│   └── knowledge/               # Knowledge base files
+│       ├── universities.json    # 985/211/双一流 university list
+│       ├── admission_scores.json# 2024 admission cutoffs by province
+│       └── majors.json          # Major details: AI risk, outlook, companies, roles
 │
-├── tests/                       # Pytest test suite
-│   ├── conftest.py              # Test configuration (dummy API key, fixtures)
-│   ├── test_models.py           # Pydantic model validation (required fields, ranges, defaults)
-│   ├── test_consolidator.py     # Data consolidation & file output
-│   ├── test_report_generator.py # Report structure & disk output
-│   └── test_api.py              # Full integration test with mocked LLM
+├── scripts/
+│   └── test_cloud.py            # Full integration test suite (run via SSH)
 │
-├── .codewhale/                  # CodeWhale AI assistant configuration
-│   ├── instructions.md          # Project constitution (tech stack, conventions, data flow)
-│   └── skills/                  # Custom skills for focused AI assistance
-│       ├── college-admissions-backend/  # API patterns, data consolidation
-│       ├── model-pipeline/              # LLM call & response parsing
-│       └── report-generator/            # Report output & formatting
+├── tests/                       # 17 pytest test cases
 │
-└── venv/                        # Python virtual environment (not committed)
+└── .codewhale/                  # AI assistant config (instructions + skills)
 ```
 
 ---
 
-## Data Flow
+## How It Works — 3-Phase Pipeline
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                        FRONTEND                              │
-│  User fills form → clicks "Submit" → POST /api/submit        │
-└──────────────────────────┬───────────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────────────┐
-│                 1. ROUTE (routes/api.py)                     │
-│     Receives StudentInfo → validates via Pydantic            │
-│     Thin handler, delegates everything to services           │
-└──────────────────────────┬───────────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────────────┐
-│             2. CONSOLIDATOR (services/consolidator.py)       │
-│     Writes student JSON to data/input/{uuid}.json            │
-│     (exclude_none=True — only saves provided fields)         │
-└──────────────────────────┬───────────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────────────┐
-│             3. MODEL PIPELINE (services/model_pipeline.py)   │
-│     Reads data JSON + prompt template                        │
-│     Renders template with student data                       │
-│     Calls Kimi (moonshot-v1-8k, response_format=json_object)  │
-│     Parses JSON response → recommendations + action_items    │
-└──────────────────────────┬───────────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────────────┐
-│             4. REPORT GENERATOR (services/report_generator.py)│
-│     Builds structured report (student_summary, recs, items)  │
-│     Saves to data/output/{report_id}.json                    │
-│     Returns frontend-safe payload (no raw model output)      │
-└──────────────────────────┬───────────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────────────┐
-│                        RESPONSE                              │
-│  { report_id, generated_at, student_summary,                 │
-│    recommendations: [{university, major, match_score,        │
-│                        rationale}],                          │
-│    action_items: ["string", ...] }                            │
-└──────────────────────────────────────────────────────────────┘
+Frontend POST /api/submit
+         │
+         ▼
+┌─────────────────────────────────────────────────┐
+│ 1. SECURITY CHECK                               │
+│    ├── Rate limit (20 req/min per IP)           │
+│    ├── JSON depth validation                     │
+│    └── Prompt injection scan                    │
+└─────────────────────┬───────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────┐
+│ 2. SAVE TO DISK & DB                            │
+│    ├── Raw JSON → data/input/{uuid}.json        │
+│    └── MySQL: requests table                    │
+└─────────────────────┬───────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────┐
+│ 3. 3-PHASE LLM WORKFLOW                         │
+│                                                  │
+│  Phase 1 — EXPLORATION                          │
+│    Kimi calls our tools:                        │
+│    ├── get_admission_scores(province, score)    │
+│    ├── get_major_details(interests)             │
+│    └── get_university_info(city)                │
+│                                                  │
+│  Phase 2 — DEEP ANALYSIS                        │
+│    Kimi analyzes: AI risk, outlook, schools,    │
+│    companies, learning paths for each option    │
+│                                                  │
+│  Phase 3 — FINAL REPORT                         │
+│    Kimi generates structured JSON:              │
+│    { profileSummary, top[], cautious[], all[] } │
+└─────────────────────┬───────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────┐
+│ 4. SAVE & RETURN                                │
+│    ├── Report → data/output/{uuid}.json         │
+│    ├── MySQL: responses table                   │
+│    └── Return to frontend                       │
+└─────────────────────────────────────────────────┘
 ```
 
 ---
@@ -119,68 +119,53 @@ ai_backend/
 
 ### `POST /api/submit`
 
-Receives any JSON object with student information and returns a college guidance report.
+Accepts any JSON object with student information. Field-agnostic — the LLM determines which fields are meaningful.
 
-The API is **field-agnostic** on input — whatever keys and values the frontend sends are
-saved and passed to the LLM as-is.  There is no field-level validation; the LLM
-determines which fields are meaningful.
-
-**Request Body** (any JSON object):
-
+**Request** (any JSON):
 ```json
 {
   "subjectTrack": "理科",
   "province": "广东",
   "score": 610,
-  "interests": "写代码、研究 AI、解决工程问题",
-  "skills": "数学能力、逻辑推理、自学能力",
-  "preferences": "高收入潜力、技术壁垒、稳定性",
+  "interests": "写代码、研究 AI",
+  "skills": "数学能力、逻辑推理",
+  "preferences": "高收入潜力、技术壁垒",
   "preferredCities": ["深圳", "杭州"],
-  "dislikes": "不想学医、不接受高压行业"
+  "dislikes": "不想学医"
 }
 ```
 
-**No required fields** — any valid JSON object is accepted.
-
-**Success Response** (200):
-
+**Response** (200):
 ```json
 {
-  "report_id": "a1b2c3d4-...",
-  "generated_at": "2026-06-19T21:00:00+00:00",
+  "report_id": "uuid",
+  "generated_at": "2026-06-21T10:00:00Z",
   "profileSummary": {
     "cluster": "技术探索型",
     "province": "广东",
     "score": "610",
     "subjectTrack": "理科",
-    "preferredCities": ["深圳", "杭州"]
+    "preferredCities": ["深圳"]
   },
   "top": [
     {
-      "id": "software-engineering",
-      "name": "软件工程",
+      "id": "computer-science",
+      "name": "计算机科学与技术",
       "recommendationBand": "强推荐",
-      "matchScore": 96,
+      "matchScore": 95,
       "aiRisk": "低",
-      "outlook": "稳定增长，但基础编码岗位门槛提高",
-      "competitiveness": 94,
-      "summary": "学生的逻辑能力和 AI 兴趣高度匹配",
-      "schoolStrategy": "优先考虑计算机学科实力强、产业资源丰富的城市",
-      "cities": [{"name": "深圳", "note": "AI 应用、智能硬件和金融科技岗位密集"}],
+      "outlook": "就业面最广，薪资高，AI时代核心专业",
+      "competitiveness": 90,
+      "summary": "与学生的兴趣和高分匹配",
+      "schoolStrategy": "优先选择深圳大学和南方科技大学",
+      "cities": [{"name": "深圳", "note": "高新技术企业密集"}],
       "companies": [{"name": "华为"}, {"name": "腾讯"}],
-      "roles": [
-        {
-          "id": "ai-application-engineer",
-          "name": "AI 应用工程师",
-          "currentDemand": "企业需要能把大模型能力接入真实业务的人才",
-          "requirements": ["Python", "大模型 API", "Web 开发"]
-        }
-      ],
+      "roles": [{"id": "swe", "name": "软件工程师", "currentDemand": "高", "requirements": ["Java", "Python", "数据结构"]}],
       "yearPlan": {
-        "year1": ["学习 Python 或 Java", "学习高等数学和线性代数"],
-        "year2": ["学习数据结构与算法", "掌握数据库和计算机网络"],
-        "year3": ["学习机器学习和大模型应用", "完成 AI 项目"],
-        "year4": ["准备校招笔试面试", "复盘实习项目"]
+        "year1": ["打好编程基础", "学习算法和数据结构"],
+        "year2": ["参与实际项目", "提升实践能力"],
+        "year3": ["实习于知名IT企业", "积累工作经验"],
+        "year4": ["准备毕业设计", "关注行业动态", "准备就业"]
       }
     }
   ],
@@ -189,141 +174,110 @@ determines which fields are meaningful.
 }
 ```
 
-**Error Response** (422 — validation error):
+### `POST /api/feedback`
 
+Record user feedback for a generated report.
+
+**Request:**
 ```json
 {
-  "detail": [
-    {
-      "type": "less_than_equal",
-      "loc": ["body", "score"],
-      "msg": "Input should be less than or equal to 750",
-      "input": 800
-    }
-  ]
+  "response_id": "uuid-from-report",
+  "rating": 4,
+  "comment": "推荐很准确"
 }
 ```
 
-**Error Response** (500 — internal error):
-
-```json
-{
-  "detail": {
-    "code": "INTERNAL_ERROR",
-    "message": "Description of what went wrong"
-  }
-}
-```
+**Response:** `{"status": "ok", "message": "Feedback recorded"}`
 
 ---
 
 ## Setup
 
-### Prerequisites
-
-- Python 3.11+
-- A [Moonshot AI (Kimi) API key](https://platform.moonshot.ai/)
-
-### Installation
-
 ```bash
-# Clone the repository
+# Clone
 git clone <repo-url>
 cd ai_backend
 
-# Create and activate virtual environment
+# Virtual environment
 python3 -m venv venv
-source venv/bin/activate   # Linux/macOS
-# .\venv\Scripts\activate  # Windows
-
-# Install dependencies
+source venv/bin/activate
 pip install -r requirements.txt
 
-# Set your API key
-echo "MOONSHOT_API_KEY=sk-..." > .env
-```
+# Configure
+echo "MOONSHOT_API_KEY=sk-your-kimi-key" > .env
+echo "MOONSHOT_BASE_URL=https://api.moonshot.cn/v1" >> .env
 
-### Run the server
+# MySQL (see DEPLOY.md for full setup)
+echo "DB_HOST=localhost" >> .env
+echo "DB_USER=aibackend" >> .env
+echo "DB_PASS=Aibackend2024!" >> .env
+echo "DB_NAME=ai_backend" >> .env
 
-```bash
-python3 main.py
-```
-
-Server starts at `http://localhost:8000`. Docs are at `http://localhost:8000/docs`.
-
-### Test it with curl
-
-```bash
-curl -X POST http://localhost:8000/api/submit \
-  -H "Content-Type: application/json" \
-  -d '{
-    "subjectTrack": "理科",
-    "province": "广东",
-    "score": 610,
-    "interests": "写代码、研究 AI",
-    "skills": "数学能力、逻辑推理",
-    "preferences": "高收入潜力、技术壁垒",
-    "preferredCities": ["深圳", "杭州"],
-    "dislikes": "不想学医"
-  }'
+# Run
+python main.py
 ```
 
 ---
 
 ## Testing
 
-The test suite covers **17 test cases** across 4 test files:
-
-| File | Tests | Focus |
-|---|---|---|
-| `tests/test_models.py` | 3 | `SubmitResponse` — required fields, empty lists |
-| `tests/test_consolidator.py` | 4 | File creation, dict fidelity, empty dict, directory creation |
-| `tests/test_report_generator.py` | 5 | Metadata wrapping, key pass-through, disk output, empty output |
-| `tests/test_api.py` | 5 | Full integration: arbitrary fields, minimal payload, empty object, rich response, file I/O |
-
-### Run tests
-
 ```bash
-# From project root with venv activated
-./venv/bin/pytest
-
-# With verbose output
+# Unit tests (17 test cases)
 ./venv/bin/pytest -v
 
-# Run a specific test file
-./venv/bin/pytest tests/test_models.py
+# Full cloud integration test (via SSH)
+./venv/bin/python scripts/test_cloud.py --ssh
 ```
-
-Tests use:
-- `tmp_path` — isolated temp directories so no real data is touched
-- `monkeypatch` — replaces module-level paths and the LLM call with mocks
-- `AsyncMock` — simulates the LLM response without calling the real API
 
 ---
 
 ## Configuration
 
-| Environment variable | Required | Description |
-|---|---|---|
-| `MOONSHOT_API_KEY` | Yes | Your Moonshot AI (Kimi) API key |
-| `MOONSHOT_BASE_URL` | No | API base URL (default: `https://api.moonshot.ai/v1`) |
-| `MOONSHOT_MODEL` | No | Model ID (default: `moonshot-v1-8k`) |
-
-Create a `.env` file in the project root:
-
-```
-MOONSHOT_API_KEY=sk-your-key-here
-```
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| `MOONSHOT_API_KEY` | Yes | — | Kimi API key |
+| `MOONSHOT_BASE_URL` | No | `https://api.moonshot.ai/v1` | Kimi API endpoint |
+| `MOONSHOT_MODEL` | No | `moonshot-v1-8k` | Kimi model name |
+| `DB_HOST` | No | `localhost` | MySQL host |
+| `DB_PORT` | No | `3306` | MySQL port |
+| `DB_USER` | No | `aibackend` | MySQL user |
+| `DB_PASS` | No | `Aibackend2024!` | MySQL password |
+| `DB_NAME` | No | `ai_backend` | MySQL database |
+| `LOG_DIR` | No | `/root/Desktop/career/log` | Log file directory |
+| `DEV` | No | — | Set to `true` for hot-reload |
 
 ---
 
-## Skills & Prompts (for AI-assisted development)
+## Security
 
-This project includes configuration files that enhance AI assistant (CodeWhale) sessions:
+| Layer | Protection |
+|---|---|
+| Rate limiting | 20 requests/min per IP |
+| JSON depth check | Max 6 levels nesting |
+| Key/array limits | Max 50 keys, 100 items per array |
+| Prompt injection scan | Detects "ignore instructions", "system prompt" etc. |
+| Prompt boundaries | Student data wrapped in `[学生数据开始]/[学生数据结束]` |
 
-- **`.codewhale/instructions.md`** — Persistent project constitution. Tells the AI about the tech stack, data flow, project structure, and coding conventions every session.
-- **`.codewhale/skills/college-admissions-backend/SKILL.md`** — API endpoint patterns, data consolidation workflow
-- **`.codewhale/skills/model-pipeline/SKILL.md`** — LLM call patterns, prompt rendering, response parsing
-- **`.codewhale/skills/report-generator/SKILL.md`** — Report structure definition, output formatting
+## Knowledge Base
 
-These travel with the repo — any AI assistant that supports CodeWhale or OpenCode will discover them automatically.
+The system includes curated reference data files in `data/knowledge/`:
+
+| File | Content |
+|---|---|
+| `universities.json` | 37 key universities with 985/211/双一流 tiers, cities, types |
+| `admission_scores.json` | 2024 admission cutoffs for 5+ provinces |
+| `majors.json` | 11 major categories with AI risk, outlook, companies, roles, requirements |
+
+Kimi queries this data dynamically via function calling — only what's needed per student.
+
+## Deployment
+
+See `DEPLOY.md` for full production deployment guide (Nginx, systemd, MySQL, HTTPS).
+
+Quick commands on cloud server:
+```bash
+cd /root/Desktop/career/ai_backend
+sudo git pull origin main
+sudo pkill -f "python.*main.py"
+sudo nohup ./venv/bin/python -u main.py > /tmp/server.log 2>&1 &
+```
