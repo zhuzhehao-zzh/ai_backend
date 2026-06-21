@@ -1,0 +1,46 @@
+{
+  "name": "华南师范大学",
+  "name_en": "South China Normal University",
+  "short": "华师/SCNU",
+  "tier": "211",
+  "double_first_class": true,
+  "city": "广州",
+  "province": "广东",
+  "type": "师范",
+  "campus": ["石牌校区", "大学城校区", "南海校区"],
+  "rankings": {
+    "校友会_2024": 57,
+    "学科评估_A类": 4,
+    "note": "心理学A+，教育学A-"
+  },
+  "website": "https://www.scnu.edu.cn",
+  "admission_channels": [
+    {"type": "普通高考", "note": "物理类570-600分"},
+    {"type": "师范专项", "note": "广东省公费师范生"}
+  ],
+  "employment": {
+    "overall_rate": "95%",
+    "top_employers": ["广东省中小学", "教育局", "公务员", "国企"],
+    "graduate_school_rate": "30%"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 574,
+      "control_rank": 34000,
+      "major_scores": [
+        {"name": "计算机科学与技术", "min_score": 598, "min_rank": 20000},
+        {"name": "软件工程", "min_score": 592, "min_rank": 23000},
+        {"name": "数学与应用数学(师范)", "min_score": 582, "min_rank": 28000},
+        {"name": "物理学(师范)", "min_score": 578, "min_rank": 31000},
+        {"name": "心理学", "min_score": 585, "min_rank": 26500},
+        {"name": "教育技术学", "min_score": 574, "min_rank": 34000}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["师范", "心理", "计算机", "数学", "教育"],
+    "score_range": "574-598（广东物理类）",
+    "summary": "广东最强师范院校，211工程，心理学全国顶尖。想当老师或从事教育行业的首选，计算机专业也有一定实力。"
+  }
+}

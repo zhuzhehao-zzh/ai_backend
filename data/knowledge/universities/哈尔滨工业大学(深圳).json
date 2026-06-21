@@ -1,0 +1,46 @@
+{
+  "name": "哈尔滨工业大学（深圳）",
+  "name_en": "Harbin Institute of Technology (Shenzhen)",
+  "short": "哈工大深圳/HITSZ",
+  "tier": "985",
+  "double_first_class": true,
+  "city": "深圳",
+  "province": "广东",
+  "type": "理工",
+  "campus": ["深圳大学城"],
+  "rankings": {
+    "QS_2024": 256,
+    "校友会_2024": 10,
+    "学科评估_A类": 17,
+    "note": "校本部C9联盟，深圳校区分数高于本部"
+  },
+  "admission_channels": [
+    {"type": "普通高考", "note": "物理类640-660分"},
+    {"type": "综合评价", "note": "少量名额"}
+  ],
+  "employment": {
+    "overall_rate": "98%",
+    "top_employers": ["华为", "腾讯", "大疆", "中兴", "中国航天"],
+    "graduate_school_rate": "55%",
+    "note": "深圳校区毕业生主要留深就业"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 655,
+      "control_rank": 1863,
+      "major_scores": [
+        {"name": "计算机科学与技术", "min_score": 662, "min_rank": 1400},
+        {"name": "数据科学与大数据技术", "min_score": 660, "min_rank": 1550},
+        {"name": "人工智能", "min_score": 659, "min_rank": 1600},
+        {"name": "自动化", "min_score": 657, "min_rank": 1750},
+        {"name": "电子信息工程", "min_score": 655, "min_rank": 1863}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["计算机", "AI", "自动化", "航天", "电子"],
+    "score_range": "655-665（广东物理类）",
+    "summary": "C9名校深圳校区，分数极高，计算机和AI方向突出。地理位置优越，就业率接近100%。"
+  }
+}

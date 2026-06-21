@@ -1,0 +1,47 @@
+{
+  "name": "广东工业大学",
+  "name_en": "Guangdong University of Technology",
+  "short": "广工/GDUT",
+  "tier": "双非",
+  "double_first_class": false,
+  "city": "广州",
+  "province": "广东",
+  "type": "理工",
+  "campus": ["大学城校区", "龙洞校区", "东风路校区", "番禺校区"],
+  "rankings": {
+    "校友会_2024": 91,
+    "学科评估_A类": 0,
+    "note": "广东省高水平大学重点建设高校"
+  },
+  "website": "https://www.gdut.edu.cn",
+  "admission_channels": [
+    {"type": "普通高考", "note": "物理类540-570分"},
+    {"type": "地方专项", "note": "农村学生专项"}
+  ],
+  "employment": {
+    "overall_rate": "95%",
+    "average_salary": "约8.5万/年",
+    "top_employers": ["华为", "美的", "格力", "广汽", "中国移动"],
+    "graduate_school_rate": "18%"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 548,
+      "control_rank": 52000,
+      "major_scores": [
+        {"name": "计算机科学与技术", "min_score": 570, "min_rank": 35000},
+        {"name": "软件工程", "min_score": 565, "min_rank": 38000},
+        {"name": "自动化", "min_score": 558, "min_rank": 42000},
+        {"name": "机械设计制造及其自动化", "min_score": 550, "min_rank": 50000},
+        {"name": "电子信息工程", "min_score": 555, "min_rank": 45000},
+        {"name": "材料成型及控制工程", "min_score": 548, "min_rank": 52000}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["计算机", "机械", "自动化", "电子", "工业设计"],
+    "score_range": "548-570（广东物理类）",
+    "summary": "广东省属最强理工院校，工科实力扎实，就业率不错。性价比高，分数在550分左右的广东考生重点考虑。"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "暨南大学",
+  "name_en": "Jinan University",
+  "short": "暨大/JNU",
+  "tier": "211",
+  "double_first_class": true,
+  "city": "广州",
+  "province": "广东",
+  "type": "综合",
+  "campus": ["石牌校区", "番禺校区", "珠海校区", "深圳校区"],
+  "rankings": {
+    "QS_2024": 631,
+    "校友会_2024": 50,
+    "学科评估_A类": 1
+  },
+  "website": "https://www.jnu.edu.cn",
+  "admission_channels": [
+    {"type": "普通高考", "note": "物理类580-610分"},
+    {"type": "艺术类", "note": "特殊专业"}
+  ],
+  "employment": {
+    "overall_rate": "96%",
+    "average_salary": "约9.5万/年",
+    "top_employers": ["南方电网", "广州国企", "银行", "媒体"],
+    "graduate_school_rate": "32%"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 586,
+      "control_rank": 26000,
+      "major_scores": [
+        {"name": "计算机科学与技术", "min_score": 610, "min_rank": 14500},
+        {"name": "软件工程", "min_score": 605, "min_rank": 16500},
+        {"name": "电子信息工程", "min_score": 598, "min_rank": 20000},
+        {"name": "金融学(CFA)", "min_score": 595, "min_rank": 21500},
+        {"name": "会计学(CPA)", "min_score": 590, "min_rank": 24000},
+        {"name": "新闻传播学", "min_score": 586, "min_rank": 26000}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["计算机", "金融", "会计", "新闻", "经济"],
+    "score_range": "586-610（广东物理类）",
+    "summary": "广州211综合性大学，经管类专业实力强，计算机也有一定水平。华侨最高学府，国际化程度高。"
+  }
+}

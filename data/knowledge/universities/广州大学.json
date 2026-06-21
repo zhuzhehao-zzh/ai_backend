@@ -1,0 +1,44 @@
+{
+  "name": "广州大学",
+  "name_en": "Guangzhou University",
+  "short": "广大/GZHU",
+  "tier": "双非",
+  "double_first_class": false,
+  "city": "广州",
+  "province": "广东",
+  "type": "综合",
+  "campus": ["大学城校区", "桂花岗校区"],
+  "rankings": {
+    "校友会_2024": 114,
+    "学科评估_A类": 0,
+    "note": "广东省高水平大学建设高校"
+  },
+  "website": "https://www.gzhu.edu.cn",
+  "admission_channels": [
+    {"type": "普通高考", "note": "物理类530-560分"}
+  ],
+  "employment": {
+    "overall_rate": "93%",
+    "average_salary": "约7.5万/年",
+    "top_employers": ["广州国企", "教育局", "银行", "中小学"],
+    "graduate_school_rate": "20%"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 537,
+      "control_rank": 60000,
+      "major_scores": [
+        {"name": "计算机科学与技术", "min_score": 560, "min_rank": 40000},
+        {"name": "数学与应用数学(师范)", "min_score": 548, "min_rank": 49000},
+        {"name": "土木工程", "min_score": 540, "min_rank": 56000},
+        {"name": "环境工程", "min_score": 537, "min_rank": 60000}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["计算机", "师范", "土木", "管理"],
+    "score_range": "537-560（广东物理类）",
+    "summary": "广州市属综合性大学，性价比高，师范类专业有优势。适合分数在540分左右的考生作为保底选择。"
+  }
+}
