@@ -1,4 +1,4 @@
-"""Knowledge base service — selects relevant reference data per student and injects into prompt."""
+"""Knowledge base tools — callable by Kimi via function calling."""
 
 import json
 import logging
@@ -7,125 +7,156 @@ from pathlib import Path
 logger = logging.getLogger(__name__)
 
 KNOWLEDGE_DIR = Path("data/knowledge")
-
-# Cache loaded data to avoid repeated file I/O
 _cache = {}
 
 
 def _load(name: str) -> dict:
-    """Load a JSON knowledge file (cached)."""
     if name not in _cache:
         path = KNOWLEDGE_DIR / name
         if path.exists():
             _cache[name] = json.loads(path.read_text(encoding="utf-8"))
         else:
             _cache[name] = {}
-            logger.warning("Knowledge file not found: %s", path)
     return _cache[name]
 
 
-def get_reference_data(student_data: dict) -> str:
-    """Build a compact reference-data block for the prompt, tailored to this student.
+# ── Tool definitions (sent to Kimi as function schema) ────────────
 
-    Returns an empty string when there is no relevant data.
-    """
-    province = student_data.get("province", "")
-    score = student_data.get("score")
-    interests = student_data.get("interests", "")
-    preferred_cities = student_data.get("preferredCities") or student_data.get("city", "")
+TOOLS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_admission_scores",
+            "description": "查询某省份某分数段内可报考的大学及其历年录取分数线",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "province": {"type": "string", "description": "省份名称, 如 广东"},
+                    "score": {"type": "number", "description": "高考分数"},
+                    "range": {"type": "number", "description": "分数浮动范围（默认60分）"},
+                },
+                "required": ["province", "score"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_university_info",
+            "description": "查询大学的基本信息：层次（985/211）、城市、类型",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "city": {"type": "string", "description": "城市名称（可选）"},
+                    "name": {"type": "string", "description": "大学名称（可选）"},
+                },
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_major_details",
+            "description": "查询专业的详细信息：前景、AI风险、强校、对口企业、技能要求",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "interest_keywords": {
+                        "type": "string",
+                        "description": "兴趣关键词, 如 计算机、编程、AI",
+                    },
+                },
+                "required": ["interest_keywords"],
+            },
+        },
+    },
+]
 
-    # Normalize preferred cities
-    if isinstance(preferred_cities, str):
-        preferred_cities = [preferred_cities]
 
-    parts = []
+# ── Tool execution handlers ────────────────────────────────────────
 
-    # ── 1. Admission scores for this province ─────────────────────
+def handle_tool_call(name: str, args: dict) -> str:
+    """Execute a tool and return a JSON string result."""
+    handlers = {
+        "get_admission_scores": _handle_admission_scores,
+        "get_university_info": _handle_university_info,
+        "get_major_details": _handle_major_details,
+    }
+    handler = handlers.get(name)
+    if not handler:
+        return json.dumps({"error": f"Unknown tool: {name}"})
+    try:
+        result = handler(**args)
+        return json.dumps(result, ensure_ascii=False)
+    except Exception as e:
+        return json.dumps({"error": str(e)})
+
+
+def _handle_admission_scores(province: str, score: float, range: float = 60) -> dict:
     scores_data = _load("admission_scores.json")
     province_data = scores_data.get("provinces", {}).get(province, {})
-    if province_data and score:
-        line = province_data.get("province_control_line", {})
-        line_str = ""
-        if line:
-            line_str = "（" + "、".join(f"{k}线{v}" for k, v in line.items()) + "）"
-        
-        schools = province_data.get("universities", [])
-        matches = []
-        for s in schools:
-            min_s = s.get("min_score", 0)
-            if min_s and score and abs(score - min_s) <= 60:
-                matches.append(f"  - {s['name']}: {min_s}分")
-        
-        if matches:
-            sc = str(score)
-            parts.append(f"### 参考分数线（{province}）{line_str}")
-            parts.append(f"你的分数{sc}分，以下学校近年录取线在±60分范围内：")
-            parts.extend(matches[:12])  # max 12 rows
+    if not province_data:
+        return {"matches": [], "message": f"暂无{province}的数据"}
 
-    # ── 2. University info ───────────────────────────────────────
+    line = province_data.get("province_control_line", {})
+    schools = province_data.get("universities", [])
+    matches = []
+    for s in schools:
+        min_s = s.get("min_score", 0)
+        if min_s and abs(score - min_s) <= range:
+            matches.append({
+                "name": s["name"],
+                "min_score": min_s,
+                "min_rank": s.get("min_rank"),
+                "gap": round(score - min_s, 1),
+            })
+    matches.sort(key=lambda x: abs(x["gap"]))
+
+    return {
+        "province": province,
+        "your_score": score,
+        "control_line": line,
+        "matches": matches,
+        "total_in_database": len(schools),
+    }
+
+
+def _handle_university_info(city: str = None, name: str = None) -> dict:
     uni_data = _load("universities.json")
     unis = uni_data.get("schools", [])
+    results = []
 
-    # Filter: preferred cities + nearby
-    target_unis = []
-    if preferred_cities:
-        for city in preferred_cities:
-            for u in unis:
-                if u.get("city") == city and u.get("name") not in target_unis:
-                    target_unis.append(u)
+    for u in unis:
+        if name and name in u["name"]:
+            results.append(u)
+        elif city and u.get("city") == city:
+            results.append(u)
 
-    if target_unis:
-        parts.append("\n### 偏好城市重点大学")
-        for u in target_unis[:8]:
-            tier = u.get("tier", "")
-            dc = "双一流" if u.get("double_first_class") else ""
-            tag = f"[{tier}]" if tier != "双非" else ""
-            tag += f"[{dc}]" if dc else ""
-            parts.append(f"  - {u['name']} {tag} {u['city']} {u.get('type','')}")
+    if not results:
+        return {"message": "未找到匹配的大学", "results": []}
+    return {"results": results[:10]}
 
-    # ── 3. Major info (only if interests mentioned) ──────────────
+
+def _handle_major_details(interest_keywords: str) -> dict:
     maj_data = _load("majors.json")
     majors = maj_data.get("majors", [])
+    keywords = interest_keywords.lower()
+    results = []
 
-    if interests:
-        # Find majors matching the interests text
-        interest_keywords = interests.lower()
-        matched = []
+    for m in majors:
+        name = m["name"].lower()
+        # Score relevance: how many characters of the interest match the major name
+        score = sum(1 for kw in name.split() if len(kw) >= 2 and kw in keywords)
+        if score > 0:
+            results.append((score, m))
+    
+    # If no keyword match, return all majors with categories matching tech
+    if not results:
         for m in majors:
-            name = m.get("name", "").lower()
-            keywords = " ".join(m.get("keywords", []))
-            field = m.get("category", "").lower()
-            # Simple relevance: check if interest text contains major name parts
-            for kw in name.split():
-                if len(kw) >= 2 and kw in interest_keywords:
-                    matched.append(m)
-                    break
+            results.append((0, m))
 
-        # If no keyword match, show majors matching the student's subject track
-        if not matched:
-            track = student_data.get("subjectTrack", "")
-            if "理" in track or "物" in track:
-                matched = [m for m in majors if m.get("category") in ("工学", "理学", "医学")]
-            elif "文" in track:
-                matched = [m for m in majors if m.get("category") in ("经济学", "法学", "文学")]
-
-        if matched:
-            parts.append("\n### 相关专业信息")
-            for m in matched[:5]:
-                info_parts = [
-                    m["name"],
-                    f"AI风险:{m.get('ai_risk','?')}",
-                    f"前景:{m.get('outlook','?')}",
-                    f"竞争热度:{m.get('competitiveness','?')}/100",
-                ]
-                top = m.get("top_universities", [])
-                if top:
-                    info_parts.append("强校:" + ",".join(top[:4]))
-                companies = m.get("target_companies", [])
-                if companies:
-                    info_parts.append("对口:" + ",".join(companies[:4]))
-                parts.append("  - " + " | ".join(info_parts))
-
-    result = "\n".join(parts)
-    logger.info("Knowledge data generated (%d chars)", len(result))
-    return result
+    results.sort(key=lambda x: -x[0])
+    return {
+        "majors": [r[1] for r in results[:5]],
+        "total_available": len(majors),
+    }
