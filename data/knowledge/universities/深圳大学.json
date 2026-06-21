@@ -1,0 +1,49 @@
+{
+  "name": "深圳大学",
+  "name_en": "Shenzhen University",
+  "short": "深大/SZU",
+  "tier": "双非",
+  "double_first_class": false,
+  "city": "深圳",
+  "province": "广东",
+  "type": "综合",
+  "campus": ["粤海校区", "沧海校区", "丽湖校区"],
+  "rankings": {
+    "QS_2024": 601,
+    "ARWU_2024": "301-400",
+    "校友会_2024": 38,
+    "学科评估_A类": 0
+  },
+  "website": "https://www.szu.edu.cn",
+  "admission_channels": [
+    {"type": "普通高考", "note": "主要途径，物理类575-607分"},
+    {"type": "地方专项", "note": "广东省内农村学生专项"}
+  ],
+  "employment": {
+    "overall_rate": "96.2%",
+    "average_salary": "约11.5万/年",
+    "top_employers": ["腾讯", "华为", "中兴", "大疆", "比亚迪"],
+    "graduate_school_rate": "25%"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 588,
+      "control_rank": 24893,
+      "major_scores": [
+        {"name": "计算机科学与技术", "min_score": 607, "min_rank": 17000, "note": "深大最强专业"},
+        {"name": "软件工程", "min_score": 603, "min_rank": 18500},
+        {"name": "电子信息工程", "min_score": 600, "min_rank": 20000},
+        {"name": "人工智能", "min_score": 598, "min_rank": 21000},
+        {"name": "数学与应用数学", "min_score": 595, "min_rank": 22500},
+        {"name": "自动化", "min_score": 592, "min_rank": 23500},
+        {"name": "材料科学与工程", "min_score": 588, "min_rank": 24893}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["计算机", "软件", "电子信息", "互联网", "金融科技"],
+    "score_range": "588-607（广东物理类）",
+    "summary": "深圳本土最强综合大学，地理位置优越，腾讯华为等企业校招重点院校。计算机类专业实力强劲，双非院校中的顶尖选择。"
+  }
+}

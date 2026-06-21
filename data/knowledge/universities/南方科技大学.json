@@ -1,0 +1,48 @@
+{
+  "name": "南方科技大学",
+  "name_en": "Southern University of Science and Technology",
+  "short": "南科大/SUSTech",
+  "tier": "双非",
+  "double_first_class": true,
+  "city": "深圳",
+  "province": "广东",
+  "type": "理工",
+  "campus": ["南科大校区"],
+  "rankings": {
+    "QS_2024": "未上榜",
+    "ARWU_2024": "301-400",
+    "校友会_2024": 55,
+    "学科评估_A类": 0
+  },
+  "website": "https://www.sustech.edu.cn",
+  "admission_channels": [
+    {"type": "综合评价", "count": 1350, "note": "提前批，高考60%+校测30%+学业10%"},
+    {"type": "普通高考", "note": "少量统招名额"}
+  ],
+  "employment": {
+    "overall_rate": "93%",
+    "average_salary": "约10万/年",
+    "top_employers": ["华为", "中兴", "腾讯", "科研院所"],
+    "graduate_school_rate": "65%",
+    "note": "深造率极高，出国留学比例大"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 615,
+      "control_rank": 12000,
+      "note": "综合评价为主，高考分数610-630可通过综评录取",
+      "major_scores": [
+        {"name": "计算机科学与技术", "min_score": 620, "min_rank": 10000},
+        {"name": "微电子科学与工程", "min_score": 618, "min_rank": 10800},
+        {"name": "人工智能", "min_score": 617, "min_rank": 11200},
+        {"name": "数学与应用数学", "min_score": 615, "min_rank": 12000}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["计算机", "微电子", "AI", "科研", "出国深造"],
+    "score_range": "610-630（广东，需综评）",
+    "summary": "深圳年轻研究型大学，双一流新贵。以科研和出国深造见长，适合有志于学术研究的学生。采用综合评价录取（631模式），不只是看高考分数。"
+  }
+}

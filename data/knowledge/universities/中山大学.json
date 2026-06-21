@@ -1,0 +1,49 @@
+{
+  "name": "中山大学",
+  "name_en": "Sun Yat-sen University",
+  "short": "中大/SYSU",
+  "tier": "985",
+  "double_first_class": true,
+  "city": "广州",
+  "province": "广东",
+  "type": "综合",
+  "campus": ["广州南校园", "广州北校园", "广州东校园", "珠海校区", "深圳校区"],
+  "rankings": {
+    "QS_2024": 323,
+    "ARWU_2024": "101-150",
+    "校友会_2024": 12,
+    "学科评估_A类": 14
+  },
+  "website": "https://www.sysu.edu.cn",
+  "admission_channels": [
+    {"type": "普通高考", "note": "主要途径，物理类624-662分"}
+  ],
+  "employment": {
+    "overall_rate": "97.8%",
+    "average_salary": "约12.0万/年",
+    "top_employers": ["南方电网", "华为", "腾讯", "广州国企", "政府机关"],
+    "graduate_school_rate": "48%"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 624,
+      "control_rank": 9560,
+      "major_scores": [
+        {"name": "计算机科学与技术", "min_score": 649, "min_rank": 3000, "note": "深圳校区"},
+        {"name": "临床医学(八年制)", "min_score": 662, "min_rank": 1452, "note": "最高分专业"},
+        {"name": "电子信息类", "min_score": 640, "min_rank": 4800},
+        {"name": "数学类", "min_score": 635, "min_rank": 6000},
+        {"name": "软件工程", "min_score": 633, "min_rank": 6800},
+        {"name": "人工智能", "min_score": 630, "min_rank": 8000},
+        {"name": "经济学类", "min_score": 628, "min_rank": 8700},
+        {"name": "工商管理", "min_score": 624, "min_rank": 9560}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["计算机", "医学", "经济", "管理", "数学", "电子", "AI"],
+    "score_range": "624-662（广东物理类）",
+    "summary": "广东第一高校，华南地区综合实力最强。医学、计算机、经管均为优势学科。校园遍布广深珠，资源丰富。"
+  }
+}

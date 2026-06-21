@@ -1,0 +1,53 @@
+{
+  "name": "华南理工大学",
+  "name_en": "South China University of Technology",
+  "short": "华工/SCUT",
+  "tier": "985",
+  "double_first_class": true,
+  "city": "广州",
+  "province": "广东",
+  "type": "理工",
+  "campus": ["五山校区", "大学城校区", "广州国际校区"],
+  "rankings": {
+    "QS_2024": 392,
+    "ARWU_2024": "201-300",
+    "校友会_2024": 26,
+    "学科评估_A类": 8
+  },
+  "website": "https://www.scut.edu.cn",
+  "admission_channels": [
+    {"type": "普通高考", "note": "主要途径，物理类610-649分"},
+    {"type": "综合评价", "count": 300, "note": "高考60%+校测30%+学业10%"},
+    {"type": "强基计划", "count": 20, "note": "基础学科，本硕博连读"}
+  ],
+  "employment": {
+    "overall_rate": "98.5%",
+    "average_salary": "约12.8万/年",
+    "top_employers": ["华为", "腾讯", "南方电网", "广汽集团", "中国建筑"],
+    "graduate_school_rate": "42%"
+  },
+  "majors_by_province": {
+    "广东": {
+      "subject_track": "物理类",
+      "control_line": 610,
+      "control_rank": 16262,
+      "major_scores": [
+        {"name": "计算机科学与技术(全英创新班)", "min_score": 649, "min_rank": 3014, "note": "最高分专业"},
+        {"name": "软件工程(卓越班)", "min_score": 638, "min_rank": 5500},
+        {"name": "软件工程", "min_score": 625, "min_rank": 8700},
+        {"name": "电子科学与技术", "min_score": 622, "min_rank": 9500},
+        {"name": "自动化", "min_score": 620, "min_rank": 10000},
+        {"name": "电气工程及其自动化", "min_score": 618, "min_rank": 11000},
+        {"name": "信息工程", "min_score": 616, "min_rank": 12500},
+        {"name": "数学类", "min_score": 614, "min_rank": 14000},
+        {"name": "物理学类", "min_score": 612, "min_rank": 15000},
+        {"name": "新闻传播学类", "min_score": 610, "min_rank": 16262}
+      ]
+    }
+  },
+  "recommended_for": {
+    "interests": ["计算机", "软件工程", "电子信息", "自动化", "电气", "数学", "物理"],
+    "score_range": "610-649（广东物理类）",
+    "summary": "华南地区最强理工院校，计算机和电子信息类专业突出，就业率极高。适合分数在610分以上、对理工科感兴趣的学生。"
+  }
+}

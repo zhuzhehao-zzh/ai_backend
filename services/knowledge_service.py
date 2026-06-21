@@ -56,6 +56,21 @@ TOOLS = [
     {
         "type": "function",
         "function": {
+            "name": "get_university_details",
+            "description": "查询某所大学的详细信息：各专业历年录取分数线、就业率、薪资、校区、排名等",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "name": {"type": "string", "description": "大学全名, 如 华南理工大学"},
+                    "province": {"type": "string", "description": "省份（可选），用于过滤"},
+                },
+                "required": ["name"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
             "name": "get_major_details",
             "description": "查询专业的详细信息：前景、AI风险、强校、对口企业、技能要求",
             "parameters": {
@@ -80,6 +95,7 @@ def handle_tool_call(name: str, args: dict) -> str:
     handlers = {
         "get_admission_scores": _handle_admission_scores,
         "get_university_info": _handle_university_info,
+        "get_university_details": _handle_university_details,
         "get_major_details": _handle_major_details,
     }
     handler = handlers.get(name)
@@ -135,6 +151,43 @@ def _handle_university_info(city: str = None, name: str = None) -> dict:
     if not results:
         return {"message": "未找到匹配的大学", "results": []}
     return {"results": results[:10]}
+
+
+def _handle_university_details(name: str, province: str = None) -> dict:
+    """Load detailed university data from individual file in data/knowledge/universities/."""
+    uni_dir = KNOWLEDGE_DIR / "universities"
+    if not uni_dir.exists():
+        return {"error": "University details directory not found", "results": []}
+
+    results = []
+    for f in uni_dir.iterdir():
+        if f.suffix != ".json":
+            continue
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if name and name in data.get("name", ""):
+            results.append(data)
+        elif province and data.get("province") == province:
+            results.append(data)
+
+    if not results:
+        # Try fuzzy match
+        for f in uni_dir.iterdir():
+            if f.suffix != ".json":
+                continue
+            if name and name[:2] in f.stem:
+                try:
+                    results.append(json.loads(f.read_text(encoding="utf-8")))
+                except Exception:
+                    continue
+
+    if not results:
+        return {"error": f"未找到大学: {name}", "results": []}
+
+    # Return full details
+    return {"results": results}
 
 
 def _handle_major_details(interest_keywords: str) -> dict:
