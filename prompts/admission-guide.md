@@ -8,6 +8,8 @@
 
 {historical_patterns}
 
+{reference_data}
+
 ## JSON 输出格式
 
 {

@@ -47,10 +47,17 @@ async def generate_report(
     data_path: Path,
     prompt_template_path: Path,
     patterns: str = "",
+    reference_data: str = "",
 ) -> dict:
-    """Load data + prompt (optionally enriched with patterns), call Kimi, parse response."""
+    """Load data + prompt (enriched with patterns + reference data), call Kimi, parse response."""
     data = json.loads(data_path.read_text(encoding="utf-8"))
     template = prompt_template_path.read_text(encoding="utf-8")
+
+    # Inject reference data (knowledge base) into prompt
+    if reference_data:
+        template = template.replace("{reference_data}", reference_data)
+    else:
+        template = template.replace("{reference_data}\n", "")
 
     # Build prompt with security boundaries around student data
     prompt = build_secure_prompt(

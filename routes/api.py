@@ -13,6 +13,7 @@ from services.model_pipeline import generate_report
 from services.report_generator import save_report
 from services.database import save_request, save_response, save_feedback
 from services.history_service import get_pattern_summary
+from services.knowledge_service import get_reference_data
 from services.security import (
     check_rate_limit,
     validate_json_depth,
@@ -61,8 +62,9 @@ async def submit(data: dict = Body(...), request: Request = None):
             logger.warning("DB save failed (request)", exc_info=True)
 
         patterns = await get_pattern_summary()
+        reference_data = get_reference_data(data)
         prompt_path = PROMPT_DIR / "admission-guide.md"
-        model_response = await generate_report(data_path, prompt_path, patterns)
+        model_response = await generate_report(data_path, prompt_path, patterns, reference_data)
         report = await save_report(model_response)
 
         try:
