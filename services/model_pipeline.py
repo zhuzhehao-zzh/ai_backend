@@ -122,7 +122,7 @@ async def generate_report(
     ]
     messages = await _call_with_tools(messages, max_rounds=3)
     phase1_summary = next(
-        (m.content for m in reversed(messages) if m["role"] == "assistant" and m.content),
+        (m.content for m in reversed(messages) if getattr(m, "role", None) == "assistant" and getattr(m, "content", None)),
         "",
     )
 
@@ -142,7 +142,7 @@ async def generate_report(
     })
     messages = await _call_with_tools(messages, max_rounds=3)
     phase2_summary = next(
-        (m.content for m in reversed(messages) if m["role"] == "assistant" and m.content),
+        (m.content for m in reversed(messages) if getattr(m, "role", None) == "assistant" and getattr(m, "content", None)),
         "",
     )
 
