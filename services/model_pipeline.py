@@ -27,23 +27,33 @@ client = AsyncOpenAI(
 
 def _extract_json(raw: str) -> dict:
     raw = raw.strip()
+
+    # 1. Direct parse
     try:
         return json.loads(raw)
     except json.JSONDecodeError:
         pass
-    m = re.search(r"```(?:json)?\s*\n?(.*?)\n?```", raw, re.DOTALL)
-    if m:
-        try:
-            return json.loads(m.group(1).strip())
-        except json.JSONDecodeError:
-            pass
-    start = raw.find("{")
-    end = raw.rfind("}")
+
+    # 2. Strip markdown code fences manually
+    cleaned = raw
+    if cleaned.startswith("```"):
+        cleaned = re.sub(r"^```\w*\s*\n?", "", cleaned)
+        cleaned = re.sub(r"\n?```\s*$", "", cleaned)
+
+    try:
+        return json.loads(cleaned.strip())
+    except json.JSONDecodeError:
+        pass
+
+    # 3. Extract from first { to last }
+    start = cleaned.find("{")
+    end = cleaned.rfind("}")
     if start != -1 and end > start:
         try:
-            return json.loads(raw[start : end + 1])
+            return json.loads(cleaned[start : end + 1])
         except json.JSONDecodeError:
             pass
+
     raise ValueError(f"Could not extract valid JSON.\nPreview: {raw[:500]}")
 
 
@@ -176,6 +186,7 @@ async def generate_report(
     response = await client.chat.completions.create(
         model=os.getenv("MOONSHOT_MODEL", "moonshot-v1-8k"),
         messages=messages,
+        response_format={"type": "json_object"},
         temperature=0.5,
         max_tokens=8000,
     )
