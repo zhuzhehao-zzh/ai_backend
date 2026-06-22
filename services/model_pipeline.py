@@ -168,9 +168,9 @@ async def generate_report(
             '"yearPlan": {"year1":[".."],"year2":[".."],"year3":[".."],"year4":[".."]}\n'
             "  }],\n"
             '  "cautious": [...],\n'
-            '  "all": [...]\n'
+            '  "all": 必须与 top 格式相同的完整对象数组（不是简单 ID 列表，而是完整的推荐对象）\n'
             "}\n\n"
-            "只返回 JSON，不要加其他文字。确保每个 top 项都有完整的 yearPlan。"
+            "只返回 JSON，不要加其他文字。确保每个 top 项都有完整的 yearPlan。all 字段必须是完整的推荐对象，不能是字符串列表。"
         ),
     })
     response = await client.chat.completions.create(
@@ -182,4 +182,13 @@ async def generate_report(
     content = response.choices[0].message.content or "{}"
     logger.info("Phase 3 response: %s chars", len(content))
 
-    return _extract_json(content)
+    result = _extract_json(content)
+
+    # Safety net: ensure "all" contains full objects, not strings
+    if result.get("all") and isinstance(result["all"][0], str):
+        by_id = {}
+        for entry in result.get("top", []) + result.get("cautious", []):
+            by_id[entry.get("id", "")] = entry
+        result["all"] = [by_id.get(sid, {"id": sid, "name": sid}) for sid in result["all"]]
+
+    return result
