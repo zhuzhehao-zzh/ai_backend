@@ -27,10 +27,18 @@ router = APIRouter(prefix="/api", tags=["submission"])
 PROMPT_DIR = Path("prompts")
 
 
+def _real_ip(request: Request) -> str:
+    """Get real client IP from X-Forwarded-For or direct connection."""
+    forwarded = request.headers.get("x-forwarded-for", "")
+    if forwarded:
+        return forwarded.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+
 @router.post("/submit", response_model=SubmitResponse)
 async def submit(data: dict = Body(...), request: Request = None):
     """Receive student data → security checks → save → Kimi → save response."""
-    client_ip = request.client.host if request and request.client else "unknown"
+    client_ip = _real_ip(request) if request else "unknown"
     request_id = str(uuid.uuid4())
 
     # ── Security checks ──────────────────────────────────────────
@@ -98,7 +106,7 @@ async def submit(data: dict = Body(...), request: Request = None):
 @router.post("/feedback")
 async def feedback(body: dict = Body(...), request: Request = None):
     """Record user feedback (rating 1-5) for a response."""
-    client_ip = request.client.host if request and request.client else "unknown"
+    client_ip = _real_ip(request) if request else "unknown"
     record_request(client_ip)
     response_id = body.get("response_id")
     rating = body.get("rating")
