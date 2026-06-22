@@ -13,6 +13,7 @@ from services.report_generator import save_report
 from services.database import save_request, save_response, save_feedback
 from services.history_service import get_pattern_summary
 
+from services.stats_service import get_stats
 from services.security import (
     check_rate_limit,
     validate_json_depth,
@@ -114,4 +115,14 @@ async def feedback(body: dict = Body(...), request: Request = None):
         return {"status": "ok", "message": "Feedback recorded"}
     except Exception as exc:
         logger.exception("FEEDBACK FAIL | %s", client_ip)
+        raise HTTPException(status_code=500, detail=str(exc))
+
+
+@router.get("/stats")
+async def stats():
+    """Return usage statistics from server logs."""
+    try:
+        return get_stats()
+    except Exception as exc:
+        logger.exception("Stats failed")
         raise HTTPException(status_code=500, detail=str(exc))
