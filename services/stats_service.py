@@ -20,7 +20,7 @@ def get_stats() -> dict:
     requests_by_date = {}
 
     # REQUEST log format: "REQUEST  | <ip> | <uuid> | keys=..."
-    pattern = re.compile(r"(\d{4}-\d{2}-\d{2}) \S+ \[routes\.api\]\s+REQUEST\s+\|\s+([\d\.]+)\s+\|")
+    pattern = re.compile(r"(\d{4}-\d{2}-\d{2}).*\[routes\.api\].*REQUEST\s+\|\s+([\d\.]+)\s+\|")
 
     for log_file in sorted(log_dir.glob("server-*.log")):
         try:
