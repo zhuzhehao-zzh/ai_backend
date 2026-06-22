@@ -28,4 +28,4 @@ class SubmitResponse(BaseModel):
     profileSummary: dict
     top: list[dict]
     cautious: list[dict]
-    all: list[dict]
+    all: list  # Kimi may return strings or full objects here
