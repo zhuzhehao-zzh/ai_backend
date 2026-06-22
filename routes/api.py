@@ -13,7 +13,7 @@ from services.report_generator import save_report
 from services.database import save_request, save_response, save_feedback
 from services.history_service import get_pattern_summary
 
-from services.stats_service import get_stats
+from services.stats_service import get_stats, record_request
 from services.security import (
     check_rate_limit,
     validate_json_depth,
@@ -47,6 +47,8 @@ async def submit(data: dict = Body(...), request: Request = None):
     if flagged:
         logger.warning("SECURITY | %s | prompt injection flagged in: %s", client_ip, flagged)
         raise HTTPException(status_code=400, detail="Input contains prohibited patterns")
+
+    record_request(client_ip)
 
     # ── Process request ─────────────────────────────────────────
     logger.info(
@@ -97,6 +99,7 @@ async def submit(data: dict = Body(...), request: Request = None):
 async def feedback(body: dict = Body(...), request: Request = None):
     """Record user feedback (rating 1-5) for a response."""
     client_ip = request.client.host if request and request.client else "unknown"
+    record_request(client_ip)
     response_id = body.get("response_id")
     rating = body.get("rating")
     comment = body.get("comment")
