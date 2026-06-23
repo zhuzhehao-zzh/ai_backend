@@ -184,10 +184,10 @@ async def generate_report(
         ),
     })
     response = await client.chat.completions.create(
-        model=os.getenv("MOONSHOT_MODEL", "moonshot-v1-8k"),
+        model=os.getenv("MOONSHOT_MODEL", "moonshot-v1-32k"),
         messages=messages,
         temperature=0.5,
-        max_tokens=8000,
+        max_tokens=12000,
     )
     content = response.choices[0].message.content or "{}"
     logger.info("Phase 3 response: %s chars", len(content))
