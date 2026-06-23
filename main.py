@@ -18,21 +18,30 @@ from services.database import init_pool, close_pool
 LOG_DIR = os.getenv("LOG_DIR", "/root/Desktop/career/log")
 start_ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-os.makedirs(f"{LOG_DIR}/db", exist_ok=True)
+try:
+    os.makedirs(f"{LOG_DIR}/db", exist_ok=True)
+except PermissionError:
+    pass  # non-fatal — test environments may not have /root access
 
 log_format = "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 
 # Main file handler
 log_path = f"{LOG_DIR}/server-{start_ts}.log"
-file_handler = logging.FileHandler(log_path, encoding="utf-8")
-file_handler.setLevel(logging.INFO)
-file_handler.setFormatter(logging.Formatter(log_format))
+try:
+    file_handler = logging.FileHandler(log_path, encoding="utf-8")
+    file_handler.setLevel(logging.INFO)
+    file_handler.setFormatter(logging.Formatter(log_format))
+except PermissionError:
+    file_handler = None
 
 # DB file handler
 db_log_path = f"{LOG_DIR}/db/db-{start_ts}.log"
-db_handler = logging.FileHandler(db_log_path, encoding="utf-8")
-db_handler.setLevel(logging.INFO)
-db_handler.setFormatter(logging.Formatter(log_format))
+try:
+    db_handler = logging.FileHandler(db_log_path, encoding="utf-8")
+    db_handler.setLevel(logging.INFO)
+    db_handler.setFormatter(logging.Formatter(log_format))
+except PermissionError:
+    db_handler = None
 
 # Console handler
 console = logging.StreamHandler()
@@ -41,15 +50,15 @@ console.setFormatter(logging.Formatter(log_format))
 
 root = logging.getLogger()
 root.setLevel(logging.INFO)
-# Remove default handlers and add our own
 root.handlers.clear()
-root.addHandler(file_handler)
+if file_handler:
+    root.addHandler(file_handler)
 root.addHandler(console)
 
-# Give the db logger its own file
 db_logger = logging.getLogger("services.database")
 db_logger.handlers.clear()
-db_logger.addHandler(db_handler)
+if db_handler:
+    db_logger.addHandler(db_handler)
 db_logger.addHandler(console)
 
 logger = logging.getLogger(__name__)
