@@ -186,12 +186,15 @@ async def generate_report(
     response = await client.chat.completions.create(
         model=os.getenv("MOONSHOT_MODEL", "moonshot-v1-8k"),
         messages=messages,
-        response_format={"type": "json_object"},
         temperature=0.5,
         max_tokens=8000,
     )
     content = response.choices[0].message.content or "{}"
     logger.info("Phase 3 response: %s chars", len(content))
+
+    # Debug: log first and last 200 chars to diagnose parsing failures
+    logger.info("Phase 3 first 200: %s", content[:200])
+    logger.info("Phase 3 last 200: %s", content[-200:])
 
     result = _extract_json(content)
 
