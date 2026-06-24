@@ -35,14 +35,30 @@ async def close_pool():
         logger.info("MySQL pool closed")
 
 
-async def save_request(request_id: str, student_data: dict):
-    """Store a student request."""
+async def save_request(request_id: str, student_data: dict, ip_address: str = None):
+    """Store a student request with the client IP."""
     async with pool.acquire() as conn:
         async with conn.cursor() as cur:
             await cur.execute(
-                "INSERT INTO requests (request_id, student_data) VALUES (%s, %s)",
-                (request_id, json.dumps(student_data, ensure_ascii=False)),
+                "INSERT INTO requests (request_id, student_data, ip_address) VALUES (%s, %s, %s)",
+                (request_id, json.dumps(student_data, ensure_ascii=False), ip_address),
             )
+
+
+async def get_request_stats() -> dict:
+    """Compute total requests, unique IPs, and per-IP counts from DB."""
+    async with pool.acquire() as conn:
+        async with conn.cursor() as cur:
+            await cur.execute("SELECT COUNT(*) FROM requests")
+            total = (await cur.fetchone())[0]
+
+            await cur.execute("SELECT COUNT(DISTINCT ip_address) FROM requests WHERE ip_address IS NOT NULL")
+            unique = (await cur.fetchone())[0]
+
+            await cur.execute("SELECT ip_address, COUNT(*) FROM requests WHERE ip_address IS NOT NULL GROUP BY ip_address ORDER BY COUNT(*) DESC")
+            per_ip = {row[0]: row[1] for row in await cur.fetchall()}
+
+    return {"total_requests": total, "unique_ips": unique, "per_ip": per_ip}
 
 
 async def save_response(

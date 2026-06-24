@@ -13,7 +13,7 @@ from services.report_generator import save_report
 from services.database import save_request, save_response, save_feedback
 from services.history_service import get_pattern_summary
 
-from services.stats_service import get_stats, record_request
+from services.stats_service import get_stats
 from services.security import (
     check_rate_limit,
     validate_json_depth,
@@ -56,8 +56,6 @@ async def submit(data: dict = Body(...), request: Request = None):
         logger.warning("SECURITY | %s | prompt injection flagged in: %s", client_ip, flagged)
         raise HTTPException(status_code=400, detail="Input contains prohibited patterns")
 
-    record_request(client_ip)
-
     # ── Process request ─────────────────────────────────────────
     logger.info(
         "REQUEST  | %s | %s | keys=%s",
@@ -67,7 +65,7 @@ async def submit(data: dict = Body(...), request: Request = None):
     try:
         data_path = await consolidate_and_save(data)
         try:
-            await save_request(request_id, data)
+            await save_request(request_id, data, client_ip)
         except Exception:
             logger.warning("DB save failed (request)", exc_info=True)
 
@@ -107,7 +105,6 @@ async def submit(data: dict = Body(...), request: Request = None):
 async def feedback(body: dict = Body(...), request: Request = None):
     """Record user feedback (rating 1-5) for a response."""
     client_ip = _real_ip(request) if request else "unknown"
-    record_request(client_ip)
     response_id = body.get("response_id")
     rating = body.get("rating")
     comment = body.get("comment")
@@ -131,10 +128,10 @@ async def feedback(body: dict = Body(...), request: Request = None):
 
 @router.get("/stats")
 async def stats(request: Request = None):
-    """Return usage statistics, including current IP's request count."""
+    """Return usage statistics from DB, including current IP's request count."""
     try:
         client_ip = _real_ip(request) if request else None
-        return get_stats(client_ip)
+        return await get_stats(client_ip)
     except Exception as exc:
         logger.exception("Stats failed")
         raise HTTPException(status_code=500, detail=str(exc))
