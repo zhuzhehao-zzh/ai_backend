@@ -3,7 +3,7 @@
 import threading
 
 _total = 0
-_ips = set()
+_ips = {}
 _lock = threading.Lock()
 
 
@@ -12,13 +12,17 @@ def record_request(ip: str):
     global _total
     with _lock:
         _total += 1
-        _ips.add(ip)
+        _ips[ip] = _ips.get(ip, 0) + 1
 
 
-def get_stats() -> dict:
-    """Return current counters."""
+def get_stats(ip: str = None) -> dict:
+    """Return current counters, optionally with per-IP breakdown."""
     with _lock:
-        return {
+        result = {
             "total_requests": _total,
             "unique_ips": len(_ips),
         }
+        if ip:
+            result["your_ip"] = ip
+            result["your_requests"] = _ips.get(ip, 0)
+        return result

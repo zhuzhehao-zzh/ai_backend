@@ -130,10 +130,11 @@ async def feedback(body: dict = Body(...), request: Request = None):
 
 
 @router.get("/stats")
-async def stats():
-    """Return usage statistics from server logs."""
+async def stats(request: Request = None):
+    """Return usage statistics, including current IP's request count."""
     try:
-        return get_stats()
+        client_ip = _real_ip(request) if request else None
+        return get_stats(client_ip)
     except Exception as exc:
         logger.exception("Stats failed")
         raise HTTPException(status_code=500, detail=str(exc))
