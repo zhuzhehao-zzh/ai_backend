@@ -198,18 +198,21 @@ async def generate_report(
 
     result = _extract_json(content)
 
-    # Safety net: fill missing required fields
+    # Safety net: fill missing required fields (marked as auto-generated)
     for field in ("top", "cautious", "all"):
         if field not in result:
+            logger.warning("Kimi omitted '%s', auto-filling with empty list", field)
             result[field] = []
     if "profileSummary" not in result:
-        result["profileSummary"] = {}
+        logger.warning("Kimi omitted 'profileSummary', auto-filling")
+        result["profileSummary"] = {"_auto_filled": True, "cluster": "未生成"}
 
     # Ensure "all" contains full objects, not strings
     if result.get("all") and isinstance(result["all"][0], str):
+        logger.warning("Kimi returned strings in 'all', converting to dicts")
         by_id = {}
         for entry in result.get("top", []) + result.get("cautious", []):
             by_id[entry.get("id", "")] = entry
-        result["all"] = [by_id.get(sid, {"id": sid, "name": sid}) for sid in result["all"]]
+        result["all"] = [by_id.get(sid, {"id": sid, "name": sid, "_auto_filled": True}) for sid in result["all"]]
 
     return result
