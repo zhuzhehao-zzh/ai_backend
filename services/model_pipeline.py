@@ -198,7 +198,14 @@ async def generate_report(
 
     result = _extract_json(content)
 
-    # Safety net: ensure "all" contains full objects, not strings
+    # Safety net: fill missing required fields
+    for field in ("top", "cautious", "all"):
+        if field not in result:
+            result[field] = []
+    if "profileSummary" not in result:
+        result["profileSummary"] = {}
+
+    # Ensure "all" contains full objects, not strings
     if result.get("all") and isinstance(result["all"][0], str):
         by_id = {}
         for entry in result.get("top", []) + result.get("cautious", []):
